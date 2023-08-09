@@ -44,8 +44,8 @@ class HomeFragment : Fragment() {
 
 
             override fun onResponse(call: Call<Pages?>, response: Response<Pages?>) {
-                Log.d("test",response.body()?.results?.get(0)?.title.toString() )
-                val adapter=MoviesAdapter((response.body()?.results ?: emptyList()) as ArrayList<Results>)
+                val movie=response.body()?.results ?: emptyList()
+                val adapter=MoviesAdapter(movie as ArrayList<Results>)
                 binding.rvHome.adapter=adapter
                 binding.rvHome.layoutManager= GridLayoutManager(context,2)
             }

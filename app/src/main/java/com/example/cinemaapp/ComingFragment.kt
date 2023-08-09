@@ -14,10 +14,20 @@ import com.example.example.Results
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
+import java.util.Calendar
+import java.util.Date
+import java.util.TimeZone
 
 class ComingFragment : Fragment() {
 
 lateinit var binding:FragmentComingBinding
+    val egyptZoneId = ZoneId.of("Africa/Cairo")
+    val egyptDate = LocalDate.now(egyptZoneId)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,13 +46,15 @@ lateinit var binding:FragmentComingBinding
         return  binding.root
     }
     fun setUpRecycler(){
+
+
         val movieService = RetrofitClient.apiServiceInstanceComing().getComingPlayingMovies("a955e58bd823d85f421b6e04ba7fc8e0")
         movieService?.enqueue(object : Callback<Pages?>{
 
             override fun onResponse(call: Call<Pages?>, response: Response<Pages?>) {
-                Log.d("test",response.body()?.results?.get(0)?.title.toString() )
-
-                val adapter=MoviesAdapter((response.body()?.results ?: emptyList()) as ArrayList<Results>)
+                val movies = response.body()?.results ?: emptyList()
+                val filteredMovies = filterMoviesByDate(movies)
+                val adapter=MoviesAdapter(filteredMovies as ArrayList<Results>)
                 binding.rvComing.adapter=adapter
                 binding.rvComing.layoutManager= GridLayoutManager(context,2)
             }
@@ -54,6 +66,13 @@ lateinit var binding:FragmentComingBinding
         })
 
 
+    }
+    fun filterMoviesByDate(movies: List<Results>): List<Results> {
+        val filteredMovies = movies.filter { movie ->
+            val movieDate = LocalDate.parse(movie.releaseDate)
+            movieDate > egyptDate
+        }
+        return filteredMovies
     }
 
 

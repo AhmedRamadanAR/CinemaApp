@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.databinding.ItemMovieBinding
 import com.example.example.Results
 import com.squareup.picasso.Picasso
+import java.time.LocalDate
+import java.time.ZoneId
 
 class MoviesAdapter(val lista: ArrayList<Results>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
@@ -27,7 +29,10 @@ class MoviesAdapter(val lista: ArrayList<Results>) : RecyclerView.Adapter<Movies
     override fun getItemCount() = lista.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val movie = lista[position]
+
+
         val posterUrl = "https://image.tmdb.org/t/p/w500/${movie.posterPath}"
         Picasso.get().load(posterUrl)
             .placeholder(R.drawable.ic_launcher_background)
