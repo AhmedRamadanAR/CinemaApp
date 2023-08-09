@@ -1,8 +1,6 @@
 package com.example.cinemaapp.Data.remote
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object RetrofitClient {
     fun instant(): Retrofit =
@@ -13,5 +11,7 @@ object RetrofitClient {
 
 
     fun apiServiceInstance(): MovieService = instant().create((MovieService::class.java))
+    fun apiServiceInstanceComing(): ComingMoviesService = instant().create((ComingMoviesService::class.java))
+
 }
 
