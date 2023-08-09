@@ -13,17 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpViewPager()
-        setUpTabLayout()
+
     }
-    fun setUpViewPager(){
-   val viewPagerAdapter=ViewPagerAdapter(this)
-        binding.ViewPager.adapter=viewPagerAdapter
-    }
-    fun setUpTabLayout(){
-        val tabNames= listOf("Playing Now","Coming Soon")
-        TabLayoutMediator(binding.tabs,binding.ViewPager){tab,positon->
-            tab.text=tabNames[positon]
-        }.attach()
-    }
+
 }
