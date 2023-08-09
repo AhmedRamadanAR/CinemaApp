@@ -12,14 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpRecycler()
-
     }
     fun setUpRecycler(){
-        var lista:List<Int> = listOf<Int>(R.drawable.movie1,R.drawable.movie1,R.drawable.movie1,R.drawable.movie1,R.drawable.movie1)
-        val adapter=MoviesAdapter(lista)
-        binding.rv.adapter=adapter
-        binding.rv.layoutManager=GridLayoutManager(this,2)
+   //     var lista:List<Int> = listOf<Int>(R.drawable.movie1,R.drawable.movie1,R.drawable.movie1,R.drawable.movie1,R.drawable.movie1)
+     //   val adapter=MoviesAdapter(lista)
+       // binding.rv.adapter=adapter
+        //binding.rv.layoutManager=GridLayoutManager(this,2)
 
     }
 }
