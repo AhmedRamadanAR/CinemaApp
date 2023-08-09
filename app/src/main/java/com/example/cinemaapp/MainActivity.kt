@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
     fun setUpRecycler(){
         var lista:List<Int> = listOf<Int>(R.drawable.movie1,R.drawable.movie1,R.drawable.movie1,R.drawable.movie1,R.drawable.movie1)
         val adapter=MoviesAdapter(lista)
-        binding.recyclerView.layoutManager=GridLayoutManager(this,2)
-        binding.recyclerView.adapter=adapter
+        binding.rv.adapter=adapter
+        binding.rv.layoutManager=GridLayoutManager(this,2)
+
     }
 }
