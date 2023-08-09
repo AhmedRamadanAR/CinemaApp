@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.databinding.ItemMovieBinding
+import com.example.example.Results
+import com.squareup.picasso.Picasso
 
-class MoviesAdapter(val lista: List<Int>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(val lista: ArrayList<Results>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: ItemMovieBinding) : RecyclerView.ViewHolder(itemView.root) {
         val img = itemView.imageView
@@ -25,6 +27,11 @@ class MoviesAdapter(val lista: List<Int>) : RecyclerView.Adapter<MoviesAdapter.V
     override fun getItemCount() = lista.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.img.setImageResource(R.drawable.movie1)
+        val movie = lista[position]
+        val posterUrl = "https://image.tmdb.org/t/p/w500/${movie.posterPath}"
+        Picasso.get().load(posterUrl)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(holder.img)
+
     }
 }
