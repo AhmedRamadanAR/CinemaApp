@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:background="@color/black_light"
     android:layout_height="match_parent"
     tools:context=".BasicFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:background="@color/black_light"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@id/ViewPager"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/blue"
-        app:tabInlineLabel="true"
-        app:tabMinWidth="90dp"
-        app:tabSelectedTextColor="@color/blue"
-        app:tabTextColor="#ABABAB">
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView2"
+        app:layout_constraintVertical_bias="0.995"
+        app:menu="@menu/bottom_nav">
 
-    </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/ViewPager"
-        android:background="@color/black_light"
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_marginTop="4dp"
+        android:id="@+id/fragmentContainerView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        >
-    </androidx.viewpager2.widget.ViewPager2>
-</FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
