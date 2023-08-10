@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#0296E5</color>
     <color name="black_light">#242A32</color>
+    <color name="red">#9F3932</color>
+    <color name="yellow">#FFC107</color>
 <!--    <color name="green" >#9899C5</color>-->
 <!--    <color name="neon_cyan" >#00FEFC</color>-->
 </resources>
