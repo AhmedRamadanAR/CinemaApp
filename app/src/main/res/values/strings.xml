@@ -23,4 +23,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="do_have_an_account">Do have an account</string>
+    <string name="small">S</string>
+    <string name="medium">M</string>
+    <string name="large">L</string>
 </resources>

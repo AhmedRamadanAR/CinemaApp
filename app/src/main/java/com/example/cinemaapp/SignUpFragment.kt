@@ -2,6 +2,7 @@ package com.example.cinemaapp
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,9 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSignup.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+            Log.d("hello", "onViewCreated: ${binding.etName.text.toString()}")
         }
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

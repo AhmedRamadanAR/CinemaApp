@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CheckOutFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:elevation="200dp"
+
+        app:cardBackgroundColor="@color/black_light"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.321">
+
+        <LinearLayout
+            android:layout_width="288dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_btn_sizes"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_margin="10dp"
+                android:background="@color/black_light"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintStart_toEndOf="@+id/iv_food"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_small"
+
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/small" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_medium"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/medium" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_large"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/large" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_small1"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/small" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_medium1"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/medium" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_large1"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/large" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_btn_sizes2"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_margin="10dp"
+                android:background="@color/black_light"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintStart_toEndOf="@+id/iv_food"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_small2"
+
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/small" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_medium2"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/medium" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_large2"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/large" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_small3"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/small" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_medium3"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/medium" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_large3"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/large" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_btn_sizes4"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_margin="10dp"
+                android:background="@color/black_light"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintStart_toEndOf="@+id/iv_food"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_small4"
+
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/small" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_medium4"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/medium" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_large4"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/large" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_small5"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/small" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_medium5"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/medium" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_large5"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_blue_border"
+                    android:text="@string/large" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
                             "rate" to movie.get(position).voteAverage
 
                         )
-                        findNavController().navigate(R.id.action_basicFragment_to_movieDetailsFragment2,info)
+                        findNavController().navigate(R.id.action_basicFragment_to_movieDetailsFragment,info)
                         Log.d("taa", "onClicked: ${movie.get(position).title.toString()}")
 
                     }

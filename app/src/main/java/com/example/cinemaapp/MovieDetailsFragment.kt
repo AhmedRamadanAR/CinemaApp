@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.cinemaapp.databinding.FragmentMovieDetailsBinding
 import com.squareup.picasso.Picasso
 
@@ -40,7 +41,9 @@ fun setUpViews(){
     binding.tvDescription.text=arguments?.getString("overView")
     binding.tvLang.text=arguments?.getString("language")
     binding.tvRate.text= arguments?.getDouble("rate").toString()
-
+binding.btnSubmit.setOnClickListener{
+    findNavController().navigate(R.id.action_movieDetailsFragment_to_checkOutFragment)
+}
     when(genre){
         28->binding.tvGenre.text="Action"
         12->binding.tvGenre.text="Adventure"

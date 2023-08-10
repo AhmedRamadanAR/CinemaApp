@@ -49,6 +49,7 @@ class HoldFragment : Fragment() {
     fun setUpViewPager() {
         val viewPagerAdapter = ViewPagerAdapter(this.requireActivity())
         binding.ViewPager.adapter = viewPagerAdapter
+
     }
 
     fun setUpTabLayout() {
