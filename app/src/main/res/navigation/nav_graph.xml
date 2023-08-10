@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_loginFragment_to_basicFragment"
             app:destination="@id/basicFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_holdFragment"
+            app:destination="@id/holdFragment" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
@@ -39,6 +42,24 @@
         <action
             android:id="@+id/action_basicFragment_to_movieDetailsFragment2"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_ticketsFragment"
+            app:destination="@id/ticketsFragment" />
+        <action
+            android:id="@+id/action_basicFragment_self"
+            app:destination="@id/basicFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_favoriteFragment2"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_ticketsFragment2"
+            app:destination="@id/ticketsFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_comingFragment"
+            app:destination="@id/comingFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -53,5 +74,49 @@
         <action
             android:id="@+id/action_homeFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.cinemaapp.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketsFragment"
+        android:name="com.example.cinemaapp.TicketsFragment"
+        android:label="fragment_tickets"
+        tools:layout="@layout/fragment_tickets" />
+    <fragment
+        android:id="@+id/holdFragment"
+        android:name="com.example.cinemaapp.HoldFragment"
+        android:label="fragment_hold"
+        tools:layout="@layout/fragment_hold" >
+        <action
+            android:id="@+id/action_holdFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_holdFragment_to_ticketsFragment"
+            app:destination="@id/ticketsFragment" />
+        <action
+            android:id="@+id/action_holdFragment_to_comingFragment"
+            app:destination="@id/comingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comingFragment"
+        android:name="com.example.cinemaapp.ComingFragment"
+        android:label="fragment_coming"
+        tools:layout="@layout/fragment_coming" >
+        <action
+            android:id="@+id/action_comingFragment_to_holdFragment"
+            app:destination="@id/holdFragment" />
+        <action
+            android:id="@+id/action_comingFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
+        <action
+            android:id="@+id/action_comingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
