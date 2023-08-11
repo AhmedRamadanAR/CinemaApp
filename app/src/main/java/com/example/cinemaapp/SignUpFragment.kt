@@ -10,8 +10,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaapp.databinding.FragmentSignupBinding
+import com.example.cinemaapp.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -23,13 +29,18 @@ class SignUpFragment : Fragment() {
 
     private lateinit var progressDialog: ProgressDialog
 
-    private var selectedValue = ""
+    private lateinit var database: FirebaseDatabase
 
+    private lateinit var userRef: DatabaseReference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         firebaseAuth = FirebaseAuth.getInstance()
+
+        firebaseAuth = Firebase.auth
+        database = Firebase.database
+        userRef = database.getReference("users")
 
         progressDialog = ProgressDialog(context)
         progressDialog.setTitle("Please Wait")
@@ -75,7 +86,7 @@ class SignUpFragment : Fragment() {
 
         if (name.isEmpty() || phone.isEmpty() || password.isEmpty() ||
             !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-            || cPass.isEmpty() || password != cPass
+            || cPass.isEmpty() || password != cPass || gender==""
         ) {
             if (name.isEmpty()) {
                 Toast.makeText(activity, "Enter Your Name", Toast.LENGTH_SHORT).show()
@@ -89,10 +100,12 @@ class SignUpFragment : Fragment() {
                 Toast.makeText(context, "Enter Your Conf Password", Toast.LENGTH_SHORT).show()
             } else if (password != cPass) {
                 Toast.makeText(context, "Password Not Same", Toast.LENGTH_SHORT).show()
-            } else if (binding.radioGroup.checkedRadioButtonId == 2131231140) {
+            } else if (binding.rbMale.isChecked) {
                 gender = "Male"
-            } else if (binding.radioGroup.checkedRadioButtonId == 2131231139) {
+            } else if (binding.rbFemale.isChecked) {
                 gender = "Female"
+            }else if(gender.isEmpty()){
+                Toast.makeText(context, "Select Gender", Toast.LENGTH_SHORT).show()
             }
         } else {
             createUserAccount()
@@ -106,7 +119,8 @@ class SignUpFragment : Fragment() {
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                updateUserInfo()
+                val user = firebaseAuth.currentUser
+                saveUserData(user, name, email, password, phone, gender)
             }
             .addOnFailureListener { e ->
                 progressDialog.dismiss()
@@ -118,43 +132,39 @@ class SignUpFragment : Fragment() {
             }
     }
 
-    private fun updateUserInfo() {
 
-        progressDialog.setMessage("Saving User Info")
+    private fun saveUserData(
+        user: FirebaseUser?,
+        name: String,
+        email: String,
+        password: String,
+        phone: String,
+        gender: String
+    ) {
+        if (user != null) {
+            val userData = User(
+                name = name,
+                email = email,
+                password = password,
+                phone = phone,
+                gender = gender
+            )
 
-        val timeStamp = System.currentTimeMillis()
+            userRef.child(user.uid).setValue(userData)
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(), "User data saved.", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
 
-        val uid = firebaseAuth.uid
-
-        val hashMap: HashMap<String, Any?> = HashMap()
-        hashMap["uid"] = uid
-        hashMap["email"] = email
-        hashMap["name"] = name
-        hashMap["phone"] = phone
-        hashMap["gender"] = gender
-        hashMap["password"] = password
-        hashMap["profileImage"] = ""
-        hashMap["userType"] = "user"
-        hashMap["timeStamp"] = timeStamp
-
-        val ref = FirebaseDatabase.getInstance().getReference()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "User data save failed.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        } else {
+            Toast.makeText(requireContext(), "User is null.", Toast.LENGTH_SHORT).show()
+        }
 
         progressDialog.dismiss()
-
-        ref.child(uid!!)
-            .setValue(hashMap)
-            .addOnSuccessListener {
-                progressDialog.dismiss()
-                Toast.makeText(context, "Account Created", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                progressDialog.dismiss()
-                Toast.makeText(
-                    context,
-                    "Failed Saving User Info due to ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
     }
+
 }
