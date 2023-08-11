@@ -22,6 +22,7 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
     }
     inner class ViewHolder(itemView: ItemMovieBinding) : RecyclerView.ViewHolder(itemView.root) {
         val img = itemView.imageView
+        val fav=itemView.ivFavourite
         fun bind(Result:Results){
             listener?.onClicked(position = adapterPosition)
         }
@@ -53,7 +54,17 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
         holder.itemView.setOnClickListener {
             holder.bind(lista[position])
 
+
+        }
+        holder.fav.setOnClickListener {
+            movie.isButtonClicked = if (movie.isButtonClicked == null) true else !movie.isButtonClicked!!
+            notifyItemChanged(position)
         }
 
+        if (movie.isButtonClicked == true) {
+            holder.fav.setImageResource(R.drawable.ic_favorite_red)
+        } else {
+            holder.fav.setImageResource(R.drawable.ic_favorite_border_white)
+        }
     }
 }
