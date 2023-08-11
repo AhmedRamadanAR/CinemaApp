@@ -26,4 +26,6 @@
     <string name="small">S</string>
     <string name="medium">M</string>
     <string name="large">L</string>
+    <string name="minus_sign">-</string>
+    <string name="plus_sign">+</string>
 </resources>
