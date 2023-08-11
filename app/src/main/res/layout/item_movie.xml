@@ -25,4 +25,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_favourite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+
+            android:src="@drawable/ic_favorite_border_white"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            android:forceHasOverlappingRendering="true"
+            android:saveEnabled="true"
+            android:contextClickable="true"
+            android:elevation="@dimen/padding10dp"
+            android:adjustViewBounds="true"
+            />
+
+
 </androidx.cardview.widget.CardView>
