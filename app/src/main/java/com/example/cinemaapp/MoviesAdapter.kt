@@ -59,6 +59,7 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
         holder.fav.setOnClickListener {
             movie.isButtonClicked = if (movie.isButtonClicked == null) true else !movie.isButtonClicked!!
             notifyItemChanged(position)
+            listener?.onClicked(position)
         }
 
         if (movie.isButtonClicked == true) {
