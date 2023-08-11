@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinemaapp.Data.remote.RetrofitClient
@@ -19,6 +21,8 @@ import retrofit2.Response
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var movieViewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,51 +39,40 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        // Initialize the ViewModel object using ViewModelProvider
+        movieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         return binding.root
     }
 
     fun setUpRecycler() {
-        val movieService = RetrofitClient.apiServiceInstance()
-            .getNowPlayingMovies("a955e58bd823d85f421b6e04ba7fc8e0")
-        movieService?.enqueue(object : Callback<Pages?> {
+        // Observe the moviesLiveData object and set the adapter and layout manager for the RecyclerView
+        movieViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { movie ->
+            val adapter = MoviesAdapter(movie as ArrayList<Results>)
+            binding.rvHome.adapter = adapter
+            binding.rvHome.layoutManager = GridLayoutManager(context, 2)
+            adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
 
+                override fun onClicked(position: Int) {
+                    val info = bundleOf(
+                        "title" to movie.get(position).title,
+                        "photo" to movie.get(position).backdropPath,
+                        "overView" to movie.get(position).overview,
+                        "type" to movie.get(position).adult,
+                        "genre" to movie.get(position).genreIds[0],
+                        "language" to movie.get(position).originalLanguage,
+                        "rate" to movie.get(position).voteAverage
 
-            override fun onResponse(call: Call<Pages?>, response: Response<Pages?>) {
-                val movie = response.body()?.results ?: emptyList()
-                val adapter = MoviesAdapter(movie as ArrayList<Results>)
+                    )
+                    findNavController().navigate(R.id.action_basicFragment_to_movieDetailsFragment,info)
+                    Log.d("taa", "onClicked: ${movie.get(position).title.toString()}")
 
-                binding.rvHome.adapter = adapter
-                binding.rvHome.layoutManager = GridLayoutManager(context, 2)
-                adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
+                }
 
-
-                    override fun onClicked(position: Int) {
-                        val info = bundleOf(
-                            "title" to movie.get(position).title,
-                            "photo" to movie.get(position).backdropPath,
-                            "overView" to movie.get(position).overview,
-                            "type" to movie.get(position).adult,
-                            "genre" to movie.get(position).genreIds[0],
-                            "language" to movie.get(position).originalLanguage,
-                            "rate" to movie.get(position).voteAverage
-
-                        )
-                        findNavController().navigate(R.id.action_basicFragment_to_movieDetailsFragment,info)
-                        Log.d("taa", "onClicked: ${movie.get(position).title.toString()}")
-
-                    }
-
-                })
-            }
-
-            override fun onFailure(call: Call<Pages?>, t: Throwable) {
-                t.toString()
-            }
-
+            })
         })
 
-
+        movieViewModel.getNowPlayingMovies()
     }
-
 }

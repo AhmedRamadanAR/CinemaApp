@@ -54,5 +54,6 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
             holder.bind(lista[position])
 
         }
+
     }
 }

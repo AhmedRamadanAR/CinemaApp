@@ -30,9 +30,6 @@
         android:label="fragment_basic"
         tools:layout="@layout/fragment_basic" >
         <action
-            android:id="@+id/action_basicFragment_to_holdFragment2"
-            app:destination="@id/holdFragment" />
-        <action
             android:id="@+id/action_basicFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
@@ -44,31 +41,10 @@
         <action
             android:id="@+id/action_movieDetailsFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.example.cinemaapp.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
-    <fragment
-        android:id="@+id/ticketsFragment"
-        android:name="com.example.cinemaapp.TicketsFragment"
-        android:label="fragment_tickets"
-        tools:layout="@layout/fragment_tickets" />
-    <fragment
-        android:id="@+id/holdFragment"
-        android:name="com.example.cinemaapp.HoldFragment"
-        android:label="fragment_hold"
-        tools:layout="@layout/fragment_hold" >
         <action
-            android:id="@+id/action_holdFragment_to_comingFragment"
-            app:destination="@id/comingFragment" />
+            android:id="@+id/action_movieDetailsFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/comingFragment"
-        android:name="com.example.cinemaapp.ComingFragment"
-        android:label="fragment_coming"
-        tools:layout="@layout/fragment_coming" />
     <fragment
         android:id="@+id/checkOutFragment"
         android:name="com.example.cinemaapp.CheckOutFragment"

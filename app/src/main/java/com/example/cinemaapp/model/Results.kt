@@ -18,6 +18,6 @@ data class Results (
   @SerializedName("title"             ) var title            : String?        = null,
   @SerializedName("video"             ) var video            : Boolean?       = null,
   @SerializedName("vote_average"      ) var voteAverage      : Double?        = null,
-  @SerializedName("vote_count"        ) var voteCount        : Int?           = null
-
+  @SerializedName("vote_count"        ) var voteCount        : Int?           = null,
+  //var isButtonClicked: Boolean? = false
 )

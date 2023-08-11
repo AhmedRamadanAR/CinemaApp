@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinemaapp.Data.remote.RetrofitClient
 import com.example.cinemaapp.databinding.FragmentComingBinding
@@ -22,8 +24,10 @@ import java.util.Date
 import java.util.TimeZone
 
 class ComingFragment : Fragment() {
+    private lateinit var movieViewModel: MainViewModel
 
-lateinit var binding:FragmentComingBinding
+
+    lateinit var binding:FragmentComingBinding
     val egyptZoneId = ZoneId.of("Africa/Cairo")
     val egyptDate = LocalDate.now(egyptZoneId)
 
@@ -43,27 +47,19 @@ lateinit var binding:FragmentComingBinding
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentComingBinding.inflate(inflater,container,false)
+
         return  binding.root
     }
     fun setUpRecycler(){
 
-
-        val movieService = RetrofitClient.apiServiceInstanceComing().getComingPlayingMovies("a955e58bd823d85f421b6e04ba7fc8e0")
-        movieService?.enqueue(object : Callback<Pages?>{
-
-            override fun onResponse(call: Call<Pages?>, response: Response<Pages?>) {
-                val movies = response.body()?.results ?: emptyList()
-                val filteredMovies = filterMoviesByDate(movies)
-                val adapter=MoviesAdapter(filteredMovies as ArrayList<Results>)
-                binding.rvComing.adapter=adapter
-                binding.rvComing.layoutManager= GridLayoutManager(context,2)
-            }
-
-            override fun onFailure(call: Call<Pages?>, t: Throwable) {
-                t.toString()
-            }
-
+        movieViewModel.moviesComingLiveData.observe(viewLifecycleOwner, Observer {movie->
+            val filteredMovies = filterMoviesByDate(movie)
+           val adapter=MoviesAdapter(filteredMovies as ArrayList<Results>)
+            binding.rvComing.adapter=adapter
+               binding.rvComing.layoutManager= GridLayoutManager(context,2)
         })
+
+        movieViewModel.getComingPlayingMovies()
 
 
     }
