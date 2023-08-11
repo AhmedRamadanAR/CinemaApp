@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signUpFragment">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/signUpFragment"
@@ -13,6 +13,7 @@
         tools:layout="@layout/fragment_signup" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
+
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
@@ -22,7 +23,15 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_basicFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/basicFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_holdFragment"
+            app:destination="@id/holdFragment" />
     </fragment>
     <fragment
         android:id="@+id/basicFragment"
@@ -77,5 +86,16 @@
         <action
             android:id="@+id/action_checkOutFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.cinemaapp.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_signUpFragment"
+            app:popUpTo="@id/splashScreen"
+            app:popUpToInclusive="true"
+            app:destination="@id/signUpFragment" />
     </fragment>
 </navigation>
