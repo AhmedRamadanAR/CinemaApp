@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_basicFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_basicFragment_to_comingFragment"
+            app:destination="@id/comingFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -54,4 +57,9 @@
             android:id="@+id/action_checkOutFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/comingFragment"
+        android:name="com.example.cinemaapp.ComingFragment"
+        android:label="fragment_coming"
+        tools:layout="@layout/fragment_coming" />
 </navigation>

@@ -47,7 +47,7 @@ class ComingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentComingBinding.inflate(inflater,container,false)
-
+        movieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         return  binding.root
     }
     fun setUpRecycler(){
