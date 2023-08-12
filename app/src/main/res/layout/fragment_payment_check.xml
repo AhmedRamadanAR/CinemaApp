@@ -305,16 +305,16 @@
 
         <TextView
             android:id="@+id/tv_total_price"
-            android:layout_marginTop="50dp"
             style="@style/CustomTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="35dp"
             android:gravity="center"
-            android:textSize="25dp"
             android:text="Total Price:"
-            app:layout_constraintEnd_toStartOf="@+id/tv_drink_count"
-            app:layout_constraintStart_toEndOf="@+id/view5"
-            app:layout_constraintTop_toBottomOf="@+id/view15" />
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_total_quantity"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_quantity"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_quantity" />
 
         <TextView
             android:id="@+id/tv_total_price_money"
@@ -322,14 +322,41 @@
             style="@style/CustomTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="0$"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_total_price"
-            app:layout_constraintEnd_toStartOf="@+id/tv_popcorn_price"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_total_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_total_price" />
+
+        <TextView
+            android:id="@+id/tv_total_quantity"
+            style="@style/CustomTextStyle"
+            android:layout_margin="35dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Total Quantity:"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_drink_count"
+            app:layout_constraintStart_toEndOf="@+id/view5"
             app:layout_constraintTop_toBottomOf="@+id/view15" />
+
+        <TextView
+            android:id="@+id/tv_total_quantity_count"
+
+            style="@style/CustomTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_total_quantity"
+            app:layout_constraintEnd_toEndOf="@+id/tv_total_price_money"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_price_money"
+            app:layout_constraintTop_toTopOf="@+id/tv_total_quantity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
