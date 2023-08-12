@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashScreen">
+    app:startDestination="@id/buyTicketSnack">
 
     <fragment
         android:id="@+id/signUpFragment"
@@ -98,4 +98,18 @@
             app:popUpToInclusive="true"
             app:destination="@id/signUpFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/buyTicketSnack"
+        android:name="com.example.cinemaapp.BuyTicketSnack"
+        android:label="fragment_buy_ticket_snack"
+        tools:layout="@layout/fragment_buy_ticket_snack" >
+        <action
+            android:id="@+id/action_buyTicketSnack_to_paymentCheck"
+            app:destination="@id/paymentCheck" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentCheck"
+        android:name="com.example.cinemaapp.PaymentCheck"
+        android:label="fragment_payment_check"
+        tools:layout="@layout/fragment_payment_check" />
 </navigation>

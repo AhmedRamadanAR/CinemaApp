@@ -39,6 +39,11 @@ class FavoriteFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpRecycler()
+    }
+
 
 
     fun setUpRecycler() {
@@ -47,24 +52,23 @@ class FavoriteFragment : Fragment() {
             val adapter = MoviesAdapter(movie as ArrayList<Results>)
             binding.rvFavourite.adapter = adapter
             binding.rvFavourite.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-            adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
+//            adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
 
-                override fun onClicked(position: Int) {
-                    val info = bundleOf(
-                        "title" to movie.get(position).title,
-                        "photo" to movie.get(position).backdropPath,
-                        "overView" to movie.get(position).overview,
-                        "type" to movie.get(position).adult,
-                        "genre" to movie.get(position).genreIds[0],
-                        "language" to movie.get(position).originalLanguage,
-                        "rate" to movie.get(position).voteAverage
-                    )
-                    findNavController().navigate(R.id.action_basicFragment_to_movieDetailsFragment,info)
-                    Log.d("taa", "onClicked: ${movie.get(position).title.toString()}")
+//                override fun onClicked(position: Int) {
+//                    val info = bundleOf(
+//                        "title" to movie.get(position).title,
+//                        "photo" to movie.get(position).backdropPath,
+//                        "overView" to movie.get(position).overview,
+//                        "type" to movie.get(position).adult,
+//                        "genre" to movie.get(position).genreIds[0],
+//                        "language" to movie.get(position).originalLanguage,
+//                        "rate" to movie.get(position).voteAverage
+//                    )
+//                    Log.d("taa", "onClicked: ${movie.get(position).title.toString()}")
+//
+//                }
 
-                }
-
-            })
+//            })
         })
 
         favouriteMovieViewModel.getNowPlayingMovies()
