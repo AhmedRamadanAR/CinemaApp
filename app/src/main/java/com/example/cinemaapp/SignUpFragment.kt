@@ -75,7 +75,7 @@ class SignUpFragment : Fragment() {
     private var password = ""
     private var phone = ""
     private var gender = ""
-
+    private var money = 200.0
     private fun validateData() {
 
         name = binding.etName.text.toString().trim()
@@ -86,7 +86,7 @@ class SignUpFragment : Fragment() {
 
         if (name.isEmpty() || phone.isEmpty() || password.isEmpty() ||
             !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-            || cPass.isEmpty() || password != cPass || gender==""
+            || cPass.isEmpty() || password != cPass || gender == ""
         ) {
             if (name.isEmpty()) {
                 Toast.makeText(activity, "Enter Your Name", Toast.LENGTH_SHORT).show()
@@ -104,7 +104,7 @@ class SignUpFragment : Fragment() {
                 gender = "Male"
             } else if (binding.rbFemale.isChecked) {
                 gender = "Female"
-            }else if(gender.isEmpty()){
+            } else if (gender.isEmpty()) {
                 Toast.makeText(context, "Select Gender", Toast.LENGTH_SHORT).show()
             }
         } else {
@@ -120,7 +120,7 @@ class SignUpFragment : Fragment() {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 val user = firebaseAuth.currentUser
-                saveUserData(user, name, email, password, phone, gender)
+                saveUserData(user, name, email, password, phone, gender, money)
             }
             .addOnFailureListener { e ->
                 progressDialog.dismiss()
@@ -139,7 +139,8 @@ class SignUpFragment : Fragment() {
         email: String,
         password: String,
         phone: String,
-        gender: String
+        gender: String,
+        money: Double
     ) {
         if (user != null) {
             val userData = User(
@@ -147,7 +148,8 @@ class SignUpFragment : Fragment() {
                 email = email,
                 password = password,
                 phone = phone,
-                gender = gender
+                gender = gender,
+                money = money
             )
 
             userRef.child(user.uid).setValue(userData)
