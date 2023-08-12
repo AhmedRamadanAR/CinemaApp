@@ -5,5 +5,6 @@ data class SnakeItemData(
     val snakeImage: Int,
     val snakeSize: Int,
     var snakeCount: Int,
-    var snakePrice: Double
+    var snakePrice: Double,
+    var snakePriceEdit: Double
 )

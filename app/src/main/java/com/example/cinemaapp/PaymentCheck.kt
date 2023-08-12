@@ -40,16 +40,28 @@ class PaymentCheck : Fragment() {
         val type = arguments?.getString("type")
         val price = arguments?.getString("price")
 
-//        val count1 = arguments?.getString("quantity1")
-//        val type1 = arguments?.getString("type1")
-//        val price1 = arguments?.getString("price1")
+        val count1 = arguments?.getString("quantity1")
+        val type1 = arguments?.getString("type1")
+        val price1 = arguments?.getString("price1")
+
+        val count2 = arguments?.getString("quantity2")
+        val type2 = arguments?.getString("type2")
+        val price2 = arguments?.getString("price2")
 //        Log.d("COME", "setUpView: $count")
 
         binding.tvPopcornCount.text = count
         binding.tvPopcornPrice.text = price+"$"
+
+        binding.tvDrinkCount.text = count1
+        binding.tvDrinkPrice.text = price1+"$"
 //
-//        binding.tvDrinkCount.text = count1
-//        binding.tvDrinkPrice.text = price1+"$"
+        binding.tvChipsCount.text = count2
+        binding.tvChipsPrice.text = price2+"$"
+
+        binding.tvTotalQuantityCount.text = (count!!.toInt()+count1!!.toInt()+count2!!.toInt()).toString()
+
+        binding.tvTotalPriceMoney.text = (price!!.toDouble()+price1!!.toDouble()+price2!!.toDouble()).toString()+"$"
+
 
 
     }

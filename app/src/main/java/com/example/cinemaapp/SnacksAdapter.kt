@@ -16,7 +16,6 @@ import com.example.cinemaapp.model.Ticket
 class SnacksAdapter(private val snakes: List<SnakeItemData>) :
     RecyclerView.Adapter<SnacksAdapter.SnakeItemViewHolder>() {
 
-    var x = 0
 //    private val viewModel: SharedViewModel by activityViewModels()
 
 
@@ -47,6 +46,10 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
         if (count.text.toString().toInt() == 0) {
             price.text = 0.toString()
         }
+
+//        val ps = 35
+//        val pm = 35 +(35* .1)
+//        val pl = 35 + (35* .2)
 
 
         var by = true
@@ -174,32 +177,30 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
 
 
         add.setOnClickListener {
+            var o = snakes[position].snakePrice
             if (!bs) {
+                val x = 35
                 if (count.text.toString().toInt() < 10) {
                     count.text = count.text.toString().toInt().inc().toString()
                     snakes.get(position).snakeCount = count.text.toString().toInt()
                     Log.d("ITME", "onBindViewHolder: ${count.text}")
-                    var o = snakes[position].snakePrice
-                    x+=35
-                    price.text = x.toString()
-//                        price.text.toString().toDouble().plus(o)
-//                            .toString()
-//                    snakes.get(position).snakePrice=price.text.toString().toDouble()
+                    price.text =
+                        price.text.toString().toDouble().plus(o)
+                            .toString()
+                    snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
 
                 }
             } else if (!bm) {
-                x=0
 
                 if (count.text.toString().toInt() < 10) {
                     count.text = count.text.toString().toInt().inc().toString()
                     snakes.get(position).snakeCount = count.text.toString().toInt()
-                    x+=35
 
-                    price.text = x.toString()
-//                        price.text.toString().toDouble().plus(snakes[position].snakePrice)
-//                            .plus((snakes[position].snakePrice) * .1)
-//                            .toString()
-//                    snakes.get(position).snakePrice = price.text.toString().toDouble()
+                    price.text =
+                        price.text.toString().toDouble()
+                            .plus(o + (o * .1))
+                            .toString()
+                    snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
 
                 }
 
@@ -210,9 +211,11 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                     snakes.get(position).snakeCount = count.text.toString().toInt()
 
                     price.text =
-                        price.text.toString().toDouble().plus(snakes[position].snakePrice)
-                            .plus((snakes[position].snakePrice) * .2)
+                        price.text.toString().toDouble()
+                            .plus(o + (o * .2))
                             .toString()
+                    snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
+
                 }
 
             }
@@ -220,6 +223,7 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
         }
 
         sub.setOnClickListener {
+            var o = snakes[position].snakePrice
             if (!bs) {
                 if (count.text.toString().toInt() > 0) {
                     count.text = count.text.toString().toInt().dec().toString()
@@ -229,11 +233,11 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                         price.text = 0.toString()
                     }
                 }
-                if (price.text.toString().toDouble() - snakes[position].snakePrice > 0) {
+                if (price.text.toString().toDouble() - o > 0) {
                     price.text =
-                        price.text.toString().toDouble().minus(snakes[position].snakePrice)
+                        price.text.toString().toDouble().minus(o)
                             .toString()
-//                    snakes.get(position).snakePrice=price.text.toString().toDouble()
+                    snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
 
                 }
             }
@@ -247,11 +251,12 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                         price.text = 0.toString()
                     }
                 }
-                if (price.text.toString().toDouble() - snakes[position].snakePrice > 0) {
+                if (price.text.toString().toDouble() - o + (o * .1) > 0) {
                     price.text =
-                        price.text.toString().toDouble().minus(snakes[position].snakePrice)
-                            .minus((snakes[position].snakePrice) * .1)
+                        price.text.toString().toDouble().minus(o + (o * .1))
                             .toString()
+                    snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
+
                 }
             }
 
@@ -264,11 +269,12 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                         price.text = 0.toString()
                     }
                 }
-                if (price.text.toString().toDouble() - snakes[position].snakePrice > 0) {
+                if (price.text.toString().toDouble() - o + (o * .2) > 0) {
                     price.text =
-                        price.text.toString().toDouble().minus(snakes[position].snakePrice)
-                            .minus((snakes[position].snakePrice) * .2)
+                        price.text.toString().toDouble().minus(o + (o * .2))
                             .toString()
+                    snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
+
                 }
             }
 

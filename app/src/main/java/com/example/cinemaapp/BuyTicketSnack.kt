@@ -45,21 +45,24 @@ class BuyTicketSnack : Fragment() {
                 R.drawable.popcorn,
                 0,
                 0,
-                35.0
+                35.0,
+                0.0
             ),
             SnakeItemData(
                 "pepsi",
                 R.drawable.can2,
                 1,
                 0,
-                50.0
+                50.0,
+                0.0
             ),
             SnakeItemData(
                 "chips",
                 R.drawable.chips,
                 2,
                 0,
-                100.0
+                100.0,
+                0.0
             ),
 
             )
@@ -130,7 +133,15 @@ class BuyTicketSnack : Fragment() {
             val info = bundleOf(
                 "quantity" to snake.get(0).snakeCount.toString(),
                 "type" to snake.get(0).type.toString(),
-                "price" to snake.get(0).snakePrice.toString(),
+                "price" to snake.get(0).snakePriceEdit.toString(),
+
+                "quantity1" to snake.get(1).snakeCount.toString(),
+                "type1" to snake.get(1).type.toString(),
+                "price1" to snake.get(1).snakePriceEdit.toString(),
+
+                "quantity2" to snake.get(2).snakeCount.toString(),
+                "type2" to snake.get(2).type.toString(),
+                "price2" to snake.get(2).snakePriceEdit.toString(),
 
 //                "quantity1" to snake.get(1).snakeCount.toString(),
 //                "type1" to snake.get(1).type.toString(),
