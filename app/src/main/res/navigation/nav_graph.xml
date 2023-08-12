@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_movieDetailsFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -106,6 +109,9 @@
         <action
             android:id="@+id/action_buyTicketSnack_to_paymentCheck"
             app:destination="@id/paymentCheck" />
+        <action
+            android:id="@+id/action_buyTicketSnack_to_basicFragment"
+            app:destination="@id/basicFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentCheck"

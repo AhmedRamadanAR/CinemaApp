@@ -4,6 +4,6 @@ data class SnakeItemData(
     val type:String,
     val snakeImage: Int,
     val snakeSize: Int,
-    val snakeCount: Int,
-    val snakePrice: Int
+    var snakeCount: Int,
+    var snakePrice: Double
 )

@@ -1,5 +1,6 @@
 package com.example.cinemaapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.example.cinemaapp.model.Ticket
 class SnacksAdapter(private val snakes: List<SnakeItemData>) :
     RecyclerView.Adapter<SnacksAdapter.SnakeItemViewHolder>() {
 
+    var x = 0
 //    private val viewModel: SharedViewModel by activityViewModels()
 
 
@@ -175,24 +177,38 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
             if (!bs) {
                 if (count.text.toString().toInt() < 10) {
                     count.text = count.text.toString().toInt().inc().toString()
-                    price.text =
-                        price.text.toString().toInt().plus(snakes[position].snakePrice)
-                            .toString()
+                    snakes.get(position).snakeCount = count.text.toString().toInt()
+                    Log.d("ITME", "onBindViewHolder: ${count.text}")
+                    var o = snakes[position].snakePrice
+                    x+=35
+                    price.text = x.toString()
+//                        price.text.toString().toDouble().plus(o)
+//                            .toString()
+//                    snakes.get(position).snakePrice=price.text.toString().toDouble()
+
                 }
             } else if (!bm) {
+                x=0
 
                 if (count.text.toString().toInt() < 10) {
                     count.text = count.text.toString().toInt().inc().toString()
-                    price.text =
-                        price.text.toString().toDouble().plus(snakes[position].snakePrice)
-                            .plus((snakes[position].snakePrice) * .1)
-                            .toString()
+                    snakes.get(position).snakeCount = count.text.toString().toInt()
+                    x+=35
+
+                    price.text = x.toString()
+//                        price.text.toString().toDouble().plus(snakes[position].snakePrice)
+//                            .plus((snakes[position].snakePrice) * .1)
+//                            .toString()
+//                    snakes.get(position).snakePrice = price.text.toString().toDouble()
+
                 }
 
             } else if (!bl) {
 
                 if (count.text.toString().toInt() < 10) {
                     count.text = count.text.toString().toInt().inc().toString()
+                    snakes.get(position).snakeCount = count.text.toString().toInt()
+
                     price.text =
                         price.text.toString().toDouble().plus(snakes[position].snakePrice)
                             .plus((snakes[position].snakePrice) * .2)
@@ -207,20 +223,26 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
             if (!bs) {
                 if (count.text.toString().toInt() > 0) {
                     count.text = count.text.toString().toInt().dec().toString()
+                    snakes.get(position).snakeCount = count.text.toString().toInt()
+                    Log.d("ITME", "onBindViewHolder: ${snakes.get(position).snakeCount}")
                     if (count.text.toString().toInt() == 0) {
                         price.text = 0.toString()
                     }
                 }
-                if (price.text.toString().toInt() - snakes[position].snakePrice > 0) {
+                if (price.text.toString().toDouble() - snakes[position].snakePrice > 0) {
                     price.text =
-                        price.text.toString().toInt().minus(snakes[position].snakePrice)
+                        price.text.toString().toDouble().minus(snakes[position].snakePrice)
                             .toString()
+//                    snakes.get(position).snakePrice=price.text.toString().toDouble()
+
                 }
             }
 
             if (!bm) {
                 if (count.text.toString().toInt() > 0) {
                     count.text = count.text.toString().toInt().dec().toString()
+                    snakes.get(position).snakeCount = count.text.toString().toInt()
+
                     if (count.text.toString().toInt() == 0) {
                         price.text = 0.toString()
                     }
@@ -236,6 +258,8 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
             if (!bl) {
                 if (count.text.toString().toInt() > 0) {
                     count.text = count.text.toString().toInt().dec().toString()
+                    snakes.get(position).snakeCount = count.text.toString().toInt()
+
                     if (count.text.toString().toInt() == 0) {
                         price.text = 0.toString()
                     }
@@ -251,6 +275,8 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
 
         }
 
+        Log.d("ITME", "onBindViewHolder: ${count.text}")
+//        snakes.get(position).snakeCount=count.text.toString().toInt()
 
 
         var sd = Ticket(
@@ -260,11 +286,15 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
         )
 
 
-
     }
 
     override fun getItemCount() = snakes.size
 
     inner class SnakeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
+
+    fun getCurrentCount(position: Int): String {
+        return snakes[position].snakeCount.toString()
+    }
+
 
 }

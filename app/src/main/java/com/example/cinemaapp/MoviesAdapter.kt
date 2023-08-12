@@ -29,13 +29,6 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
         }
 
     }
-    inner class ViewHolder2(itemView: MovieItemFavouriteBinding) : RecyclerView.ViewHolder(itemView.root) {
-        val img = itemView.image2
-//        fun bind(Result:Results){
-//            listener?.onClicked(position = adapterPosition)
-//        }
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -47,17 +40,6 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
                 )
                     )
         )
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-//        ViewHolder(
-//            (
-//                ItemMovieBinding.inflate(
-//                    LayoutInflater.from(parent.context)
-//                    , parent
-//                    , false
-//                )
-//                    )
-//        )
-
     override fun getItemCount() = lista.size
 
 
@@ -77,7 +59,6 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
         holder.fav.setOnClickListener {
             movie.isButtonClicked = if (movie.isButtonClicked == null) true else !movie.isButtonClicked!!
             notifyItemChanged(position)
-            listener?.onClicked(position)
         }
 
         if (movie.isButtonClicked == true) {

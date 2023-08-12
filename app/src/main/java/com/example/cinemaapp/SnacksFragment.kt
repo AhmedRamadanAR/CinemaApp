@@ -34,21 +34,21 @@ class SnacksFragment : Fragment() {
                 R.drawable.popcorn,
                 0,
                 0,
-                35
+                35.0
             ),
             SnakeItemData(
                 "can",
                 R.drawable.can2,
                 1,
                 0,
-                50
+                50.0
             ),
             SnakeItemData(
                 "chips",
                 R.drawable.chips,
                 2,
                 0,
-                100
+                100.0
             ),
 
             )
