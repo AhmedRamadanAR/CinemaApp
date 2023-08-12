@@ -91,12 +91,7 @@ class BuyTicketSnack : Fragment() {
                 bn = true
 
             }
-//            else {
-//                binding.btnYes.setBackgroundResource(R.drawable.rectangle_blue_border)
-//                binding.rvSnack1.visibility = View.GONE
-//
-//                by = true
-//            }
+
         }
 
         binding.btnNo.setOnClickListener {
@@ -111,25 +106,12 @@ class BuyTicketSnack : Fragment() {
                 by = true
 
             }
-//            else {
-//                binding.btnNo.setBackgroundResource(R.drawable.rectangle_blue_border)
-//                binding.rvSnack1.visibility = View.GONE
-//
-//                bn = true
-//            }
+
         }
 
 
         binding.btnNext.setOnClickListener {
-//            Log.d("Clicked100", "HELLO ${currentCount}")
-//            Log.d("Clicked100", "HELLO ${snake.get(0).snakeCount}")
 
-//            Log.d("Clicked100", "HELLO ${snake.get(0).type}")
-//            Log.d("Clicked100", "HELLO ${snake.get(0).snakeCount}")
-//            Log.d("Clicked100", "HELLO ${snake.get(0).snakePrice}")
-//            Log.d("Clicked100", "HELLO ${snake.get(1).type}")
-//            Log.d("Clicked100", "HELLO ${snake.get(1).snakeCount}")
-//            Log.d("Clicked100", "HELLO ${snake.get(1).snakePrice}")
             val info = bundleOf(
                 "quantity" to snake.get(0).snakeCount.toString(),
                 "type" to snake.get(0).type.toString(),
@@ -143,24 +125,9 @@ class BuyTicketSnack : Fragment() {
                 "type2" to snake.get(2).type.toString(),
                 "price2" to snake.get(2).snakePriceEdit.toString(),
 
-//                "quantity1" to snake.get(1).snakeCount.toString(),
-//                "type1" to snake.get(1).type.toString(),
-//                "price1" to snake.get(1).snakePrice.toString()
-            )
-//            Log.d("COME100", "HELLO ${snake.get(0).snakeCount}")
-            findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck,info)
+                )
+            findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck, info)
         }
-
-//        val info = bundleOf(
-////            "type" to snake.get(0).type,
-//            "quantity" to snake.get(0).snakeCount
-////            "price" to binding.rvSnack1.get(0).findViewById<TextView>(R.id.tv_price).text,
-////            "quantity" to binding.rvSnack1.get(0).findViewById<TextView>(R.id.tv_quantity).text
-//
-//
-//        )
-
-
 
     }
 

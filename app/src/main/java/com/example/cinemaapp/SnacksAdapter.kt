@@ -16,9 +16,6 @@ import com.example.cinemaapp.model.Ticket
 class SnacksAdapter(private val snakes: List<SnakeItemData>) :
     RecyclerView.Adapter<SnacksAdapter.SnakeItemViewHolder>() {
 
-//    private val viewModel: SharedViewModel by activityViewModels()
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SnakeItemViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.snack_item, parent, false)
@@ -47,59 +44,8 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
             price.text = 0.toString()
         }
 
-//        val ps = 35
-//        val pm = 35 +(35* .1)
-//        val pl = 35 + (35* .2)
-
-
         var by = true
         var bn = true
-
-//        if (yesno!=null){
-
-//        yesno.findViewById<Button>(R.id.btn_yes).setOnClickListener {
-//            if (by) {
-//
-//                yesno.findViewById<Button>(R.id.btn_yes)
-//                    .setBackgroundResource(R.drawable.rectangle_blue)
-//                yesno.findViewById<Button>(R.id.btn_no)
-//                    .setBackgroundResource(R.drawable.rectangle_blue_border)
-//
-//                by = false
-//                bn = true
-//
-//            } else {
-//                yesno.findViewById<Button>(R.id.btn_yes)
-//                    .setBackgroundResource(R.drawable.rectangle_blue_border)
-//                by = true
-//            }
-//        }
-//            yesno.findViewById<Button>(R.id.btn_no).setOnClickListener {
-//
-//                if (bn) {
-//
-//                    yesno.findViewById<Button>(R.id.btn_no)
-//                        .setBackgroundResource(R.drawable.rectangle_blue)
-//
-//                    yesno.findViewById<Button>(R.id.btn_yes)
-//                        .setBackgroundResource(R.drawable.rectangle_blue_border)
-//
-//                    bn = false
-//                    by = true
-//
-//                } else {
-//                    yesno.findViewById<Button>(R.id.btn_yes)
-//                        .setBackgroundResource(R.drawable.rectangle_blue_border)
-//                    bn = true
-//                }
-//            }
-//            if (!by) {
-//                holder.itemView.findViewById<RecyclerView>(R.id.rv_snack1).visibility = View.VISIBLE
-//            }
-//            if (!bn) {
-//                holder.itemView.findViewById<RecyclerView>(R.id.rv_snack1).visibility = View.GONE
-//            }
-
 
         var bs = true
         var bm = true
@@ -108,8 +54,6 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
         size.findViewById<Button>(R.id.btn_small).setOnClickListener {
             price.text = 0.toString()
             count.text = 0.toString()
-
-
 
             if (bs) {
                 size.findViewById<Button>(R.id.btn_small)
@@ -188,7 +132,6 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                         price.text.toString().toDouble().plus(o)
                             .toString()
                     snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
-
                 }
             } else if (!bm) {
 
@@ -201,7 +144,6 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                             .plus(o + (o * .1))
                             .toString()
                     snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
-
                 }
 
             } else if (!bl) {
@@ -215,11 +157,8 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                             .plus(o + (o * .2))
                             .toString()
                     snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
-
                 }
-
             }
-
         }
 
         sub.setOnClickListener {
@@ -256,7 +195,6 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                         price.text.toString().toDouble().minus(o + (o * .1))
                             .toString()
                     snakes.get(position).snakePriceEdit = price.text.toString().toDouble()
-
                 }
             }
 
@@ -277,21 +215,15 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
 
                 }
             }
-
-
         }
 
         Log.d("ITME", "onBindViewHolder: ${count.text}")
-//        snakes.get(position).snakeCount=count.text.toString().toInt()
-
 
         var sd = Ticket(
             snakes[position].type.toString(),
             snakes[position].snakeCount.toString().toInt(),
             snakes[position].snakePrice.toString().toDouble()
         )
-
-
     }
 
     override fun getItemCount() = snakes.size
