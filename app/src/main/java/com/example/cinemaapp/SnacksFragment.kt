@@ -30,18 +30,21 @@ class SnacksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var snake = mutableListOf(
             SnakeItemData(
+                "popcorn",
                 R.drawable.popcorn,
                 0,
                 0,
                 35
             ),
             SnakeItemData(
+                "can",
                 R.drawable.can2,
                 1,
                 0,
                 50
             ),
             SnakeItemData(
+                "chips",
                 R.drawable.chips,
                 2,
                 0,

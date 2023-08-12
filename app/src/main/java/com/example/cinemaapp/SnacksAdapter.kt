@@ -8,12 +8,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cinemaapp.databinding.ItemMovieBinding
-import com.example.cinemaapp.databinding.SnackItemBinding
-import layout.SnakeItemData
+import com.example.cinemaapp.model.SharedViewModel
+import com.example.cinemaapp.model.SnakeItemData
+import com.example.cinemaapp.model.Ticket
 
 class SnacksAdapter(private val snakes: List<SnakeItemData>) :
     RecyclerView.Adapter<SnacksAdapter.SnakeItemViewHolder>() {
+
+//    private val viewModel: SharedViewModel by activityViewModels()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SnakeItemViewHolder {
 
@@ -30,6 +33,7 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
         var count = holder.itemView.findViewById<TextView>(R.id.tv_quantity)
         var add = holder.itemView.findViewById<Button>(R.id.btn_add)
         var sub = holder.itemView.findViewById<Button>(R.id.btn_subtract)
+        var yesno = holder.itemView.findViewById<LinearLayout>(R.id.linearLayout_btn_yes_no)
 
         if (image != null && price != null && count != null) {
             image.setImageResource(snakes[position].snakeImage)
@@ -41,6 +45,56 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
         if (count.text.toString().toInt() == 0) {
             price.text = 0.toString()
         }
+
+
+        var by = true
+        var bn = true
+
+//        if (yesno!=null){
+
+//        yesno.findViewById<Button>(R.id.btn_yes).setOnClickListener {
+//            if (by) {
+//
+//                yesno.findViewById<Button>(R.id.btn_yes)
+//                    .setBackgroundResource(R.drawable.rectangle_blue)
+//                yesno.findViewById<Button>(R.id.btn_no)
+//                    .setBackgroundResource(R.drawable.rectangle_blue_border)
+//
+//                by = false
+//                bn = true
+//
+//            } else {
+//                yesno.findViewById<Button>(R.id.btn_yes)
+//                    .setBackgroundResource(R.drawable.rectangle_blue_border)
+//                by = true
+//            }
+//        }
+//            yesno.findViewById<Button>(R.id.btn_no).setOnClickListener {
+//
+//                if (bn) {
+//
+//                    yesno.findViewById<Button>(R.id.btn_no)
+//                        .setBackgroundResource(R.drawable.rectangle_blue)
+//
+//                    yesno.findViewById<Button>(R.id.btn_yes)
+//                        .setBackgroundResource(R.drawable.rectangle_blue_border)
+//
+//                    bn = false
+//                    by = true
+//
+//                } else {
+//                    yesno.findViewById<Button>(R.id.btn_yes)
+//                        .setBackgroundResource(R.drawable.rectangle_blue_border)
+//                    bn = true
+//                }
+//            }
+//            if (!by) {
+//                holder.itemView.findViewById<RecyclerView>(R.id.rv_snack1).visibility = View.VISIBLE
+//            }
+//            if (!bn) {
+//                holder.itemView.findViewById<RecyclerView>(R.id.rv_snack1).visibility = View.GONE
+//            }
+
 
         var bs = true
         var bm = true
@@ -125,25 +179,23 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                         price.text.toString().toInt().plus(snakes[position].snakePrice)
                             .toString()
                 }
-            }
-
-            else if (!bm){
+            } else if (!bm) {
 
                 if (count.text.toString().toInt() < 10) {
                     count.text = count.text.toString().toInt().inc().toString()
                     price.text =
-                        price.text.toString().toDouble().plus(snakes[position].snakePrice).plus((snakes[position].snakePrice)*.1)
+                        price.text.toString().toDouble().plus(snakes[position].snakePrice)
+                            .plus((snakes[position].snakePrice) * .1)
                             .toString()
                 }
 
-            }
-
-            else if (!bl){
+            } else if (!bl) {
 
                 if (count.text.toString().toInt() < 10) {
                     count.text = count.text.toString().toInt().inc().toString()
                     price.text =
-                        price.text.toString().toDouble().plus(snakes[position].snakePrice).plus((snakes[position].snakePrice)*.2)
+                        price.text.toString().toDouble().plus(snakes[position].snakePrice)
+                            .plus((snakes[position].snakePrice) * .2)
                             .toString()
                 }
 
@@ -175,7 +227,8 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                 }
                 if (price.text.toString().toDouble() - snakes[position].snakePrice > 0) {
                     price.text =
-                        price.text.toString().toDouble().minus(snakes[position].snakePrice).minus((snakes[position].snakePrice)*.1)
+                        price.text.toString().toDouble().minus(snakes[position].snakePrice)
+                            .minus((snakes[position].snakePrice) * .1)
                             .toString()
                 }
             }
@@ -189,16 +242,22 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
                 }
                 if (price.text.toString().toDouble() - snakes[position].snakePrice > 0) {
                     price.text =
-                        price.text.toString().toDouble().minus(snakes[position].snakePrice).minus((snakes[position].snakePrice)*.2)
+                        price.text.toString().toDouble().minus(snakes[position].snakePrice)
+                            .minus((snakes[position].snakePrice) * .2)
                             .toString()
                 }
             }
 
 
-
         }
 
-//        if(!bs || !bm ||!bl){
+
+
+        var sd = Ticket(
+            snakes[position].type.toString(),
+            snakes[position].snakeCount.toString().toInt(),
+            snakes[position].snakePrice.toString().toDouble()
+        )
 
 
 
