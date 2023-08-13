@@ -16,17 +16,32 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.cinemaapp.databinding.FragmentFavoriteBinding
+import com.example.cinemaapp.model.Movie
+import com.example.cinemaapp.model.MovieDao
+import com.example.cinemaapp.model.MovieDatabase
+import com.example.cinemaapppackage.FavoriteAdapter
 import com.example.example.Results
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding:FragmentFavoriteBinding
 
-    private lateinit var favouriteMovieViewModel:MainViewModel
+    private lateinit var favouriteMovieViewModel:FavViewModel
+    private var dao: MovieDao? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        GlobalScope.launch(Dispatchers.IO) {
+
+            val db = MovieDatabase.buildMovieDb(requireContext())
+            dao = db?.movieDao()
+        }
 
     }
 
@@ -34,7 +49,7 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        favouriteMovieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        favouriteMovieViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,8 +63,8 @@ class FavoriteFragment : Fragment() {
 
     fun setUpRecycler() {
         // Observe the moviesLiveData object and set the adapter and layout manager for the RecyclerView
-        favouriteMovieViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { movie ->
-            val adapter = MoviesAdapter(movie as ArrayList<Results>)
+        favouriteMovieViewModel.favLiveData.observe(viewLifecycleOwner, Observer { movie ->
+            val adapter = FavoriteAdapter(movie as ArrayList<Movie>)
             binding.rvFavourite.adapter = adapter
             binding.rvFavourite.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
 //            adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
@@ -71,7 +86,7 @@ class FavoriteFragment : Fragment() {
 //            })
         })
 
-        favouriteMovieViewModel.getNowPlayingMovies()
+        favouriteMovieViewModel.viewfavMovie(dao)
     }
 
 

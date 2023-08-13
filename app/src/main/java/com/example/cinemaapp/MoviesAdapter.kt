@@ -15,6 +15,8 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
 
     interface OnMovieClicked{
      fun onClicked(position: Int)
+     fun onFavClick(position: Int)
+     fun onDeleteClick(position: Int)
 
     }
 
@@ -62,8 +64,11 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
         }
 
         if (movie.isButtonClicked == true) {
+            listener?.onFavClick(position)
+
             holder.fav.setImageResource(R.drawable.ic_favorite_red)
         } else {
+            listener?.onDeleteClick(position)
             holder.fav.setImageResource(R.drawable.ic_favorite_border_white)
         }
     }

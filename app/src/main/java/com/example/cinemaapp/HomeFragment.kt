@@ -6,32 +6,47 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.cinemaapp.Data.remote.RetrofitClient
 import com.example.cinemaapp.databinding.FragmentHomeBinding
-import com.example.example.Pages
+import com.example.cinemaapp.model.Movie
+import com.example.cinemaapp.model.MovieDao
+import com.example.cinemaapp.model.MovieDatabase
 import com.example.example.Results
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.lang.NullPointerException
+import java.text.FieldPosition
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var movieViewModel: MainViewModel
+    private lateinit var favViewModel: FavViewModel
+    private var dao: MovieDao? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        GlobalScope.launch(Dispatchers.IO) {
+            val db = MovieDatabase.buildMovieDb(requireContext())
+            dao = db?.movieDao()
+
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRecycler()
 
+        movieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
+        observeViewModel()
+        setUpRecycler()
     }
 
     override fun onCreateView(
@@ -39,10 +54,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
         // Initialize the ViewModel object using ViewModelProvider
-        movieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         return binding.root
     }
 
@@ -65,14 +80,39 @@ class HomeFragment : Fragment() {
                         "rate" to movie.get(position).voteAverage
 
                     )
-                    findNavController().navigate(R.id.action_basicFragment_to_movieDetailsFragment,info)
+                    findNavController().navigate(
+                        R.id.action_basicFragment_to_movieDetailsFragment,
+                        info
+                    )
                     Log.d("taa", "onClicked: ${movie.get(position).title.toString()}")
 
+                }
+
+                override fun onFavClick(position: Int) {
+                    if (dao != null)
+                        favViewModel.insertMovie(
+                            dao!!,
+                            Movie("https://image.tmdb.org/t/p/w500/${movie[position].posterPath}",movie[position].title.toString(),movie[position].overview.toString())
+                        )
+
+                }
+
+                override fun onDeleteClick(position: Int) {
+                    GlobalScope.launch(Dispatchers.IO) {
+                        dao?.deleteFavoriteMovie("https://image.tmdb.org/t/p/w500/${movie[position].posterPath}")
+                    }
                 }
 
             })
         })
 
         movieViewModel.getNowPlayingMovies()
+    }
+
+    private fun observeViewModel() {
+        favViewModel.insertLiveData.observe(viewLifecycleOwner, Observer { movie ->
+            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
+
+        })
     }
 }
