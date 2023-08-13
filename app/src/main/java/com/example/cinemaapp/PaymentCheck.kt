@@ -42,9 +42,10 @@ class PaymentCheck : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView()
-        retrieveMoneyFromDatabase()
+        retrieveMoneyBeforeFromDatabase()
 
         binding.btnBuy.setOnClickListener {
+            retrieveMoneyFromDatabase()
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.buyTicketSnack, true)
                 .build()
@@ -100,64 +101,69 @@ class PaymentCheck : Fragment() {
     }
 
 
-//    fun retrieveMoneyFromDatabase() {
-//        val userId = FirebaseAuth.getInstance().currentUser?.uid
-//        if (userId != null) {
-//            database = FirebaseDatabase.getInstance().getReference("users").child(userId)
-//            val valueEventListener = object : ValueEventListener {
-//                override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                    val money = dataSnapshot.child("money").getValue(Double::class.java)
-//                    var v1 = 0.0
-//                    var v2 = 0.0
-//                    var v3 = 0.0
-//                    if (price.toString().isNotEmpty()) {
-//                        v1 = price.toString().toDouble()
+    fun retrieveMoneyFromDatabase() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            database = FirebaseDatabase.getInstance().getReference("users").child(userId)
+            val valueEventListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val money = dataSnapshot.child("money").getValue(Double::class.java)
+                    var v1 = 0.0
+                    var v2 = 0.0
+                    var v3 = 0.0
+                    var v4 = 0.0
+                    if (price.toString().isNotEmpty()) {
+                        v1 = price.toString().toDouble()
+                    }
+                    if (price1.toString().isNotEmpty()) {
+                        v2 = price1.toString().toDouble()
+                    }
+                    if (price2.toString().isNotEmpty()) {
+                        v3 = price2.toString().toDouble()
+                    }
+                    if (price3.toString().isNotEmpty()) {
+                        v4 = price3.toString().toDouble()
+                    }
+
+                    if (money != null) {
+                        if (money - (v1 + v2 + v3 + v4) > 0) {
+                            database.child("money").setValue(money - (v1 + v2 + v3 + v4))
+                            binding.tvMoneyAfterEdit.text =
+                                (money - (v1 + v2 + v3 + v4)).toString() + "$"
+                        } else {
+                            Toast.makeText(context, "You Haven't Enough Money", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+//                    else {
+//                        Toast.makeText(context, "Null Money", Toast.LENGTH_SHORT)
+//                            .show()
 //                    }
-//                    if (price1.toString().isNotEmpty()) {
-//                        v2 = price1.toString().toDouble()
-//                    }
-//                    if (price2.toString().isNotEmpty()) {
-//                        v3 = price2.toString().toDouble()
-//                    }
-//
-//                    if (money != null) {
-//                        if (money - (v1 + v2 + v3) > 0) {
-//                            database.child("money").setValue(money - (v1 + v2 + v3))
-//                            binding.tvMoneyAfterEdit.text = (money - (v1 + v2 + v3)).toString()
-//                        } else {
-//                            Toast.makeText(context, "You Haven't Enough Money", Toast.LENGTH_SHORT)
-//                                .show()
-//                        }
-//                    }
-////                    else {
-////                        Toast.makeText(context, "Null Money", Toast.LENGTH_SHORT)
-////                            .show()
-////                    }
-//                }
-//
-//                override fun onCancelled(databaseError: DatabaseError) {
-//                    Toast.makeText(
-//                        context,
-//                        "SomeThing Go wrong ${databaseError.message}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//            database.addListenerForSingleValueEvent(valueEventListener)
-//        } else {
-//            Toast.makeText(context, "You'r Not Logged In Please Login First", Toast.LENGTH_SHORT)
-//                .show()
-//        }
-//
-////            findNavController().navigate(R.id.action_paymentCheck_to_basicFragment)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(
+                        context,
+                        "SomeThing Go wrong ${databaseError.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            database.addListenerForSingleValueEvent(valueEventListener)
+        } else {
+            Toast.makeText(context, "You'r Not Logged In Please Login First", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+//            findNavController().navigate(R.id.action_paymentCheck_to_basicFragment)
 //        val navOptions = NavOptions.Builder()
 //            .setPopUpTo(R.id.buyTicketSnack, true)
 //            .build()
 //        findNavController().navigate(R.id.basicFragment, null, navOptions)
-//    }
+    }
 
 
-    fun retrieveMoneyFromDatabase() {
+    fun retrieveMoneyBeforeFromDatabase() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             database = FirebaseDatabase.getInstance().getReference("users").child(userId)
@@ -190,6 +196,5 @@ class PaymentCheck : Fragment() {
 //            .build()
 //        findNavController().navigate(R.id.basicFragment, null, navOptions)
     }
-
-
 }
+
