@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashScreen : Fragment() {
 
@@ -27,9 +28,18 @@ class SplashScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashScreen_to_signUpFragment)
-        }, 3000)
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            findNavController().navigate(R.id.basicFragment)
+        } else {
+            findNavController().navigate(R.id.loginFragment)
+        }
+
+
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            findNavController().navigate(R.id.action_splashScreen_to_signUpFragment)
+//        }, 3000)
     }
 
 }

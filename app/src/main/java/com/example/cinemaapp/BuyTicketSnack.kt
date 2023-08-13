@@ -8,18 +8,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.get
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.databinding.FragmentBuyTicketSnackBinding
 import com.example.cinemaapp.model.SnakeItemData
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 
 class BuyTicketSnack : Fragment() {
 
     private lateinit var binding: FragmentBuyTicketSnackBinding
+
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +36,14 @@ class BuyTicketSnack : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentBuyTicketSnackBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        retrieveMoneyFromDatabase()
 
 
         var snake = mutableListOf(
@@ -129,6 +136,49 @@ class BuyTicketSnack : Fragment() {
             findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck, info)
         }
 
+        binding.btnSignout.setOnClickListener {
+            signOut()
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.movieDetailsFragment, true)
+                .setPopUpTo(R.id.basicFragment,true)
+                .build()
+            findNavController().navigate(R.id.loginFragment, null, navOptions)
+//            findNavController().navigate(R.id.loginFragment)
+        }
+
+    }
+
+    fun signOut() {
+        FirebaseAuth.getInstance().signOut()
+    }
+
+    fun retrieveMoneyFromDatabase() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            database = FirebaseDatabase.getInstance().getReference("users").child(userId)
+
+            val valueEventListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val money = dataSnapshot.child("money").getValue(Double::class.java)
+                    if (money == null)
+                        binding.tvMoneyBeforeEdit.text = 0.toString() + "$"
+                    else
+                        binding.tvMoneyBeforeEdit.text = money.toString() + "$"
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(
+                        context,
+                        "SomeThing Go wrong ${databaseError.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            database.addListenerForSingleValueEvent(valueEventListener)
+        } else {
+            Toast.makeText(context, "You'r Not Logged In Please Login First", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
 

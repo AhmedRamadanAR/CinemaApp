@@ -7,24 +7,30 @@
     android:background="@color/black_light"
     tools:context=".BuyTicketSnack">
 
-    <LinearLayout
-        android:id="@+id/lnr"
-        android:layout_margin="30dp"
+
+    <TextView
+        android:id="@+id/tv_money_before_edit"
+        style="@style/CustomTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:gravity="end"
+        android:text="0$"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            style="@style/CustomTextStyle"
-            android:textSize="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="$200" />
 
-    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="SignOut"
+        android:textColor="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_money_before_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_money_before_edit" />
 
 
     <ScrollView
@@ -34,7 +40,7 @@
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lnr">
+        app:layout_constraintTop_toBottomOf="@+id/btn_signout">
 
 
         <LinearLayout

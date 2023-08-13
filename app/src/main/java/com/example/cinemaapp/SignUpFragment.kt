@@ -69,6 +69,31 @@ class SignUpFragment : Fragment() {
         return binding.root
     }
 
+    val phoneNumberregex = "^01[0|1|2|5]\\d{8}$".toRegex()
+    val Emailregex = "^[a-zA-Z]{4,}.*@.*\\.[a-zA-Z]+".toRegex()
+    val fullnameregex = "^[a-zA-Z]{4,} [a-zA-Z]{4,}".toRegex()
+    val passwordregex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$".toRegex()
+
+//    val Emailregex = "^[a-zA-Z]{4,}.*@.*\\..+".toRegex()
+//    val Emailregex = "^[a-zA-Z]{4,}.*".toRegex()
+
+    fun validatePhoneNumber(phoneNumber: String): Boolean {
+        return phoneNumberregex.matches(phoneNumber)
+    }
+
+    fun validateEmail(email: String): Boolean {
+        return Emailregex.matches(email)
+    }
+
+
+    fun validateFullName(fullName: String): Boolean {
+        return fullnameregex.matches(fullName)
+    }
+
+    fun validatePassword(password: String): Boolean {
+        return passwordregex.matches(password)
+    }
+
 
     private var name = ""
     private var email = ""
@@ -90,14 +115,28 @@ class SignUpFragment : Fragment() {
         ) {
             if (name.isEmpty()) {
                 Toast.makeText(activity, "Enter Your Name", Toast.LENGTH_SHORT).show()
+            } else if (!validateFullName(name)) {
+                Toast.makeText(context, "Name not valid", Toast.LENGTH_SHORT).show()
             } else if (phone.isEmpty()) {
                 Toast.makeText(activity, "Enter Your Phone", Toast.LENGTH_SHORT).show()
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(context, "Enter Your Email", Toast.LENGTH_SHORT).show()
+            } else if (!validatePhoneNumber(phone)) {
+                Toast.makeText(context, "Phone number not valid", Toast.LENGTH_SHORT).show()
+            }
+//            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                Toast.makeText(context, "Enter Your Email", Toast.LENGTH_SHORT).show()
+//            }
+            else if (!validateEmail(email)) {
+                Toast.makeText(context, "Email not valid", Toast.LENGTH_SHORT).show()
             } else if (password.isEmpty()) {
                 Toast.makeText(context, "Enter Your Password", Toast.LENGTH_SHORT).show()
             } else if (cPass.isEmpty()) {
                 Toast.makeText(context, "Enter Your Conf Password", Toast.LENGTH_SHORT).show()
+            } else if (!validatePassword(password)) {
+                Toast.makeText(
+                    context,
+                    "Password not valid must has at least one special character,uppercase,digit, and a length of at least 8 characters",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else if (password != cPass) {
                 Toast.makeText(context, "Password Not Same", Toast.LENGTH_SHORT).show()
             } else if (binding.rbMale.isChecked) {
@@ -120,7 +159,7 @@ class SignUpFragment : Fragment() {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 val user = firebaseAuth.currentUser
-                saveUserData(user, name, email, password, phone, gender, money)
+                saveUserData(user, name.capitalize(), email, password, phone, gender, money)
             }
             .addOnFailureListener { e ->
                 progressDialog.dismiss()
@@ -157,6 +196,8 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(requireContext(), "User data saved.", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
 
+                    clearFields()
+
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "User data save failed.", Toast.LENGTH_SHORT)
@@ -167,6 +208,21 @@ class SignUpFragment : Fragment() {
         }
 
         progressDialog.dismiss()
+    }
+
+    private fun clearFields() {
+        name = ""
+        email = ""
+        password = ""
+        phone = ""
+        gender = ""
+
+        binding.etName.setText("")
+        binding.etPhone.setText("")
+        binding.etEmail.setText("")
+        binding.etPassword.setText("")
+        binding.etPasswordConf.setText("")
+
     }
 
 }
