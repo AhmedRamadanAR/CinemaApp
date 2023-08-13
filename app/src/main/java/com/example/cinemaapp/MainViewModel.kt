@@ -1,11 +1,8 @@
 package com.example.cinemaapp
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.cinemaapp.Data.remote.RetrofitClient
-import com.example.cinemaapp.model.Movie
-import com.example.cinemaapp.model.MovieDao
+
 import com.example.example.Pages
 import com.example.example.Results
 
@@ -16,11 +13,6 @@ import retrofit2.Response
 class MainViewModel:ViewModel() {
     val moviesLiveData = MutableLiveData<List<Results>>()
     val moviesComingLiveData=MutableLiveData<List<Results>>()
-    val counterLiveData=MutableLiveData<Int>()
-    private var counter=0
-    fun increment(){
-        counterLiveData.value=++counter
-    }
         fun getNowPlayingMovies() {
             val movieService = RetrofitClient.apiServiceInstance()
                 .getNowPlayingMovies("a955e58bd823d85f421b6e04ba7fc8e0")

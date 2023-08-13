@@ -70,29 +70,31 @@ class ComingFragment : Fragment() {
 
         movieViewModel.moviesComingLiveData.observe(viewLifecycleOwner, Observer {movie->
             val filteredMovies = filterMoviesByDate(movie)
-           val adapter=MoviesAdapter(filteredMovies as ArrayList<Results>)
+           val adapter= dao?.let { MoviesAdapter(filteredMovies as ArrayList<Results>, it) }
             binding.rvComing.adapter=adapter
                binding.rvComing.layoutManager= GridLayoutManager(context,2)
-            adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
-                override fun onClicked(position: Int) {
-                }
-
-                override fun onFavClick(position: Int) {
-                    if (dao != null)
-                        favViewModel.insertMovie(
-                            dao!!,
-                            Movie("https://image.tmdb.org/t/p/w500/${filteredMovies[position].posterPath}",filteredMovies[position].title.toString(),filteredMovies[position].overview.toString())
-                        )
-
-                }
-
-                override fun onDeleteClick(position: Int) {
-                    GlobalScope.launch(Dispatchers.IO) {
-                        dao?.deleteFavoriteMovie("https://image.tmdb.org/t/p/w500/${filteredMovies[position].posterPath}")
+            if (adapter != null) {
+                adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
+                    override fun onClicked(position: Int) {
                     }
-                }
+
+                    override fun onFavClick(position: Int) {
+                        if (dao != null)
+                            favViewModel.insertMovie(
+                                dao!!,
+                                Movie("https://image.tmdb.org/t/p/w500/${filteredMovies[position].posterPath}",filteredMovies[position].title.toString(),filteredMovies[position].overview.toString(), isFavorite = true)
+                            )
+
+                    }
+
+                    override fun onDeleteClick(position: Int) {
+                        GlobalScope.launch(Dispatchers.IO) {
+                            dao?.deleteFavoriteMovie("https://image.tmdb.org/t/p/w500/${filteredMovies[position].posterPath}")
+                        }
+                    }
 
                 })
+            }
             })
 
         movieViewModel.getComingPlayingMovies()

@@ -23,8 +23,6 @@ class MovieDetailsFragment : Fragment() {
 setUpViews()
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +34,7 @@ setUpViews()
 
     override fun onDestroyView() {
         super.onDestroyView()
-        findNavController().navigate(R.id.basicFragment)
+     //   findNavController().navigate(R.id.basicFragment)
 
     }
 fun setUpViews(){
@@ -49,9 +47,8 @@ fun setUpViews(){
     binding.tvDescription.text=arguments?.getString("overView")
     binding.tvLang.text=arguments?.getString("language")
     binding.tvRate.text= arguments?.getDouble("rate").toString()
-binding.btnSubmit.setOnClickListener{
-   // findNavController().navigate(R.id.basicFragment)
-   // findNavController().navigate(R.id.action_movieDetailsFragment_to_checkOutFragment)
+ binding.btnSubmit.setOnClickListener{
+   findNavController().navigate(R.id.action_movieDetailsFragment_to_checkOutFragment)
 }
     when(genre){
         28->binding.tvGenre.text="Action"

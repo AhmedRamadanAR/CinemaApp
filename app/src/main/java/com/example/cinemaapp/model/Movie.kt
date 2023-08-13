@@ -8,5 +8,6 @@ data class Movie(
     @PrimaryKey
 var posterPath : String,
 var title:String,
-var overView:String
+var overView:String,
+    var isFavorite: Boolean
 )

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -56,9 +57,14 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
         setUpRecycler()
     }
+    private fun observeViewModel() {
+        favouriteMovieViewModel.favLiveData.observe(viewLifecycleOwner, Observer { movie ->
 
+        })
+    }
 
 
     fun setUpRecycler() {
@@ -67,23 +73,6 @@ class FavoriteFragment : Fragment() {
             val adapter = FavoriteAdapter(movie as ArrayList<Movie>)
             binding.rvFavourite.adapter = adapter
             binding.rvFavourite.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-//            adapter.setOnItemClickListener(object : MoviesAdapter.OnMovieClicked {
-
-//                override fun onClicked(position: Int) {
-//                    val info = bundleOf(
-//                        "title" to movie.get(position).title,
-//                        "photo" to movie.get(position).backdropPath,
-//                        "overView" to movie.get(position).overview,
-//                        "type" to movie.get(position).adult,
-//                        "genre" to movie.get(position).genreIds[0],
-//                        "language" to movie.get(position).originalLanguage,
-//                        "rate" to movie.get(position).voteAverage
-//                    )
-//                    Log.d("taa", "onClicked: ${movie.get(position).title.toString()}")
-//
-//                }
-
-//            })
         })
 
         favouriteMovieViewModel.viewfavMovie(dao)

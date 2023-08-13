@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface MovieDao {
@@ -16,4 +17,9 @@ interface MovieDao {
 
   @Query("DELETE FROM Movie_Table WHERE posterPath = :posterPath")
     suspend fun deleteFavoriteMovie(posterPath:String)
+    @Update
+    suspend fun updateMovie(movie: Movie)
+  @Query("SELECT * FROM Movie_Table WHERE posterPath = :posterPath")
+  suspend fun getMovieByPosterPath(posterPath: String): Movie?
+
 }
