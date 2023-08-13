@@ -51,7 +51,7 @@ class MoviesAdapter(private  val lista: ArrayList<Results>) : RecyclerView.Adapt
 
         val posterUrl = "https://image.tmdb.org/t/p/w500/${movie.posterPath}"
         Picasso.get().load(posterUrl)
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.movie1)
             .into(holder.img)
         holder.itemView.setOnClickListener {
             holder.bind(lista[position])
