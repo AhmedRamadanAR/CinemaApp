@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cinemaapp.model.SharedViewModel
 import com.example.cinemaapp.model.SnakeItemData
 import com.example.cinemaapp.model.Ticket
 

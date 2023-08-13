@@ -20,7 +20,4 @@ data class Results (
   @SerializedName("vote_average"      ) var voteAverage      : Double?        = null,
   @SerializedName("vote_count"        ) var voteCount        : Int?           = null,
   var isButtonClicked: Boolean? = false
-
-//var array : ArrayList<>=null
-
 )
