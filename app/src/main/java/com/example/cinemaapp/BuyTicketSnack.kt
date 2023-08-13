@@ -74,12 +74,35 @@ class BuyTicketSnack : Fragment() {
 
             )
 
+
+        var ticket = mutableListOf(
+            SnakeItemData(
+                "ticket",
+                R.drawable.ticket,
+                0,
+                0,
+                100.0,
+                0.0
+            )
+        )
+
         val adapterCategory = SnacksAdapter(snake)
         view.findViewById<RecyclerView>(R.id.rv_snack1).adapter = adapterCategory
         view.findViewById<RecyclerView>(R.id.rv_snack1).layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         val currentCount = adapterCategory.getCurrentCount(0)
+
+
+
+        val adapterCategoryTicket = TicketAdapter(ticket)
+        view.findViewById<RecyclerView>(R.id.rv_ticket).adapter = adapterCategoryTicket
+        view.findViewById<RecyclerView>(R.id.rv_ticket).layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+
+
+
 
 
         var by = true
@@ -131,6 +154,13 @@ class BuyTicketSnack : Fragment() {
                 "quantity2" to snake.get(2).snakeCount.toString(),
                 "type2" to snake.get(2).type.toString(),
                 "price2" to snake.get(2).snakePriceEdit.toString(),
+
+
+                "quantity3" to ticket.get(0).snakeCount.toString(),
+                "type3" to ticket.get(0).type.toString(),
+                "price3" to ticket.get(0).snakePriceEdit.toString(),
+
+
 
                 )
             findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck, info)

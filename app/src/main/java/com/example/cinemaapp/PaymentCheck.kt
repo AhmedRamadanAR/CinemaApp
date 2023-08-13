@@ -23,6 +23,7 @@ class PaymentCheck : Fragment() {
     var price = ""
     var price1 = ""
     var price2 = ""
+    var price3 = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +70,13 @@ class PaymentCheck : Fragment() {
         val count2 = arguments?.getString("quantity2")
         val type2 = arguments?.getString("type2")
         price2 = arguments?.getString("price2").toString()
+
+
+        val count3 = arguments?.getString("quantity3")
+        val type3 = arguments?.getString("type3")
+        price3 = arguments?.getString("price3").toString()
+
+
 //        Log.d("COME", "setUpView: $count")
 
         binding.tvPopcornCount.text = count
@@ -80,11 +88,14 @@ class PaymentCheck : Fragment() {
         binding.tvChipsCount.text = count2
         binding.tvChipsPrice.text = price2 + "$"
 
+        binding.tvTicketCount.text = count3
+        binding.tvTicketPrice.text = price3 + "$"
+
         binding.tvTotalQuantityCount.text =
-            (count!!.toInt() + count1!!.toInt() + count2!!.toInt()).toString()
+            (count!!.toInt() + count1!!.toInt() + count2!!.toInt() + count3!!.toInt()).toString()
 
         binding.tvTotalPriceMoney.text =
-            (price!!.toDouble() + price1!!.toDouble() + price2!!.toDouble()).toString() + "$"
+            (price!!.toDouble() + price1!!.toDouble() + price2!!.toDouble() + price3!!.toDouble()).toString() + "$"
 
     }
 
