@@ -108,6 +108,7 @@ class HomeFragment : Fragment() {
                         if (index >= 0) {
                             movie[index].isButtonClicked = true
 
+
                         }
                     }
                 }

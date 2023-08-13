@@ -68,7 +68,6 @@ class FavoriteFragment : Fragment() {
 
 
     fun setUpRecycler() {
-        // Observe the moviesLiveData object and set the adapter and layout manager for the RecyclerView
         favouriteMovieViewModel.favLiveData.observe(viewLifecycleOwner, Observer { movie ->
             val adapter = FavoriteAdapter(movie as ArrayList<Movie>)
             binding.rvFavourite.adapter = adapter

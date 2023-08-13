@@ -13,6 +13,10 @@ import com.squareup.picasso.Picasso
 class MovieDetailsFragment : Fragment() {
     lateinit var binding: FragmentMovieDetailsBinding
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        //findNavController().navigate(R.id.basicFragment)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

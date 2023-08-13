@@ -49,6 +49,8 @@ class PaymentCheck : Fragment() {
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.buyTicketSnack, true)
                 .build()
+            Toast.makeText(requireActivity().applicationContext, "Done", Toast.LENGTH_SHORT).show()
+
             findNavController().navigate(R.id.basicFragment, null, navOptions)
 
 //            findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck)
@@ -99,8 +101,6 @@ class PaymentCheck : Fragment() {
             (price!!.toDouble() + price1!!.toDouble() + price2!!.toDouble() + price3!!.toDouble()).toString() + "$"
 
     }
-
-
     fun retrieveMoneyFromDatabase() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
@@ -130,17 +130,13 @@ class PaymentCheck : Fragment() {
                             database.child("money").setValue(money - (v1 + v2 + v3 + v4))
                             binding.tvMoneyAfterEdit.text =
                                 (money - (v1 + v2 + v3 + v4)).toString() + "$"
+
                         } else {
-                            Toast.makeText(context, "You Haven't Enough Money", Toast.LENGTH_SHORT)
-                                .show()
+
+
                         }
                     }
-//                    else {
-//                        Toast.makeText(context, "Null Money", Toast.LENGTH_SHORT)
-//                            .show()
-//                    }
                 }
-
                 override fun onCancelled(databaseError: DatabaseError) {
                     Toast.makeText(
                         context,
@@ -155,11 +151,6 @@ class PaymentCheck : Fragment() {
                 .show()
         }
 
-//            findNavController().navigate(R.id.action_paymentCheck_to_basicFragment)
-//        val navOptions = NavOptions.Builder()
-//            .setPopUpTo(R.id.buyTicketSnack, true)
-//            .build()
-//        findNavController().navigate(R.id.basicFragment, null, navOptions)
     }
 
 
@@ -191,10 +182,6 @@ class PaymentCheck : Fragment() {
                 .show()
         }
 
-//        val navOptions = NavOptions.Builder()
-//            .setPopUpTo(R.id.buyTicketSnack, true)
-//            .build()
-//        findNavController().navigate(R.id.basicFragment, null, navOptions)
     }
 }
 

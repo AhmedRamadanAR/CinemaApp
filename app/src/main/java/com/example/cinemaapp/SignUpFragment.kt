@@ -72,7 +72,7 @@ class SignUpFragment : Fragment() {
     val phoneNumberregex = "^01[0|1|2|5]\\d{8}$".toRegex()
     val Emailregex = "^[a-zA-Z]{4,}.*@.*\\.[a-zA-Z]+".toRegex()
     val fullnameregex = "^[a-zA-Z]{4,} [a-zA-Z]{4,}".toRegex()
-    val passwordregex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$".toRegex()
+    val passwordregex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$".toRegex()
 
 //    val Emailregex = "^[a-zA-Z]{4,}.*@.*\\..+".toRegex()
 //    val Emailregex = "^[a-zA-Z]{4,}.*".toRegex()

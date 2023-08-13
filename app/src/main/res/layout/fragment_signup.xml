@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edt"
             android:inputType="text"
-            android:maxLength="20"
+            android:maxLength="40"
             android:maxLines="1"
             android:textColorHint="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>

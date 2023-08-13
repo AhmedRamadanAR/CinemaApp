@@ -1,4 +1,5 @@
 package com.example.cinemaapp
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,6 +12,7 @@ class FavViewModel:ViewModel() {
     val favLiveData = MutableLiveData<List<Movie>>()
     val insertLiveData = MutableLiveData<Boolean>()
     fun viewfavMovie(dao: MovieDao?) {
+
         viewModelScope.launch(Dispatchers.IO) {
             val viewMovie = dao?.readAllData()
             withContext(Dispatchers.Main) {
