@@ -163,7 +163,12 @@ class BuyTicketSnack : Fragment() {
 
 
                 )
-            findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck, info)
+
+            if (ticket.get(0).snakeCount.toString().toInt()>0)
+                findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck, info)
+            else{
+                Toast.makeText(context, "You Need To Select Ticket", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.btnSignout.setOnClickListener {

@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaapp.databinding.FragmentMovieDetailsBinding
 import com.example.cinemaapp.databinding.FragmentPaymentCheckBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class PaymentCheck : Fragment() {
 
@@ -46,10 +49,13 @@ class PaymentCheck : Fragment() {
 
         binding.btnBuy.setOnClickListener {
             retrieveMoneyFromDatabase()
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.buyTicketSnack, true)
-                .build()
+            lifecycleScope.launch {
+                delay(200) // delay for 3 seconds
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.buyTicketSnack, true)
+                    .build()
             findNavController().navigate(R.id.basicFragment, null, navOptions)
+            }
 
 //            findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck)
 

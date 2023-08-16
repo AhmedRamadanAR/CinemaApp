@@ -148,6 +148,8 @@ class LoginFragment : Fragment() {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
+                val user = firebaseAuth.currentUser
+
                 findNavController().navigate(R.id.action_loginFragment_to_basicFragment)
             } else {
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
