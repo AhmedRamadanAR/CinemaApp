@@ -130,7 +130,7 @@ class BuyTicketSnack : Fragment() {
 
                 binding.btnNo.setBackgroundResource(R.drawable.rectangle_blue)
                 binding.btnYes.setBackgroundResource(R.drawable.rectangle_blue_border)
-                binding.rvSnack1.visibility = View.GONE
+                binding.rvSnack1.visibility = View.INVISIBLE
 
                 bn = false
                 by = true
