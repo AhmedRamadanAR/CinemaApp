@@ -175,9 +175,10 @@ class BuyTicketSnack : Fragment() {
             signOut()
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.movieDetailsFragment, true)
+                .setPopUpTo(R.id.buyTicketSnack, true)
                 .setPopUpTo(R.id.basicFragment,true)
                 .build()
-            findNavController().navigate(R.id.loginFragment, null, navOptions)
+            findNavController().navigate(R.id.action_buyTicketSnack_to_loginFragment, null, navOptions)
 //            findNavController().navigate(R.id.loginFragment)
         }
 
