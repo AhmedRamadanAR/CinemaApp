@@ -23,12 +23,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.Task
+import com.google.firebase.database.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
@@ -40,6 +41,9 @@ class LoginFragment : Fragment() {
     private lateinit var progressDialog: ProgressDialog
 
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    private lateinit var database: DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,12 +80,15 @@ class LoginFragment : Fragment() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            findNavController().navigate(R.id.action_loginFragment_to_basicFragment)
-                            email=""
-                            password=""
-                            binding.etEmail.setText("")
-                            binding.etPassword.setText("")
-
+                            lifecycleScope.launch {
+                                delay(200) // delay for 3 seconds
+                                findNavController().navigate(R.id.action_loginFragment_to_basicFragment)
+                                email = ""
+                                password = ""
+                                binding.etEmail.setText("")
+                                binding.etPassword.setText("")
+                            }
+                            retrieveNameFromDatabase()
 
 
                         } else {
@@ -112,43 +119,76 @@ class LoginFragment : Fragment() {
     }
 
 
-
-    private fun signInGoogle(){
+    private fun signInGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
     }
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            result ->
-        if (result.resultCode == Activity.RESULT_OK){
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
 
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            handleResults(task)
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                handleResults(task)
+            }
         }
-    }
 
     private fun handleResults(task: Task<GoogleSignInAccount>) {
-        if (task.isSuccessful){
-            val account : GoogleSignInAccount? = task.result
-            if (account != null){
+        if (task.isSuccessful) {
+            val account: GoogleSignInAccount? = task.result
+            if (account != null) {
                 updateUI(account)
             }
-        }else{
-            Toast.makeText(context, task.exception.toString() , Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, task.exception.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun updateUI(account: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(account.idToken , null)
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
-            if (it.isSuccessful){
+            if (it.isSuccessful) {
+                val user = firebaseAuth.currentUser
+
                 findNavController().navigate(R.id.action_loginFragment_to_basicFragment)
-            }else{
-                Toast.makeText(context, it.exception.toString() , Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
             }
         }
     }
+
+
+    fun retrieveNameFromDatabase() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            database = FirebaseDatabase.getInstance().getReference("users").child(userId)
+
+            val valueEventListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val name = dataSnapshot.child("name").getValue(String::class.java)
+                    if (context != null) {
+                        Toast.makeText(context, "Hello $name ", Toast.LENGTH_SHORT).show()
+                    }
+//                    Toast.makeText(context, "Hello $name ", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(
+                        context,
+                        "SomeThing Go wrong ${databaseError.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            database.addListenerForSingleValueEvent(valueEventListener)
+        } else {
+//            findNavController().navigate(R.id.action_loginFragment_to_basicFragment)
+            Toast.makeText(context, "You'r Not Logged In Please Login First", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

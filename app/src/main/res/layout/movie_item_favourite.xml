@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    android:elevation="900dp"
+    android:outlineSpotShadowColor="@color/blue"
+    app:cardBackgroundColor="@color/black_light"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="15dp"
+    >
+
+    <TextView
+        android:maxLines="1"
+
+        android:layout_marginTop="30dp"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="145dp"
+        android:text="Movie Title"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/tv_overView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rectangle_blue_border"
+        android:paddingStart="10dp"
+        android:text="Movie OverView"
+        android:textColor="@color/white"
+
+        android:textSize="17sp">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="119dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ll" />
+
+
+</androidx.cardview.widget.CardView>

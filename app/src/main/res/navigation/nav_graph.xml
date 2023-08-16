@@ -13,7 +13,8 @@
         tools:layout="@layout/fragment_signup" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
-
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
@@ -23,11 +24,13 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_basicFragment"
-            app:popUpTo="@id/signUpFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"
             app:destination="@id/basicFragment" />
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_loginFragment_to_holdFragment"
@@ -53,6 +56,9 @@
         <action
             android:id="@+id/action_movieDetailsFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_basicFragment"
+            app:destination="@id/basicFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -98,4 +104,21 @@
             app:popUpToInclusive="true"
             app:destination="@id/signUpFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/buyTicketSnack"
+        android:name="com.example.cinemaapp.BuyTicketSnack"
+        android:label="fragment_buy_ticket_snack"
+        tools:layout="@layout/fragment_buy_ticket_snack" >
+        <action
+            android:id="@+id/action_buyTicketSnack_to_paymentCheck"
+            app:destination="@id/paymentCheck" />
+        <action
+            android:id="@+id/action_buyTicketSnack_to_basicFragment"
+            app:destination="@id/basicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentCheck"
+        android:name="com.example.cinemaapp.PaymentCheck"
+        android:label="fragment_payment_check"
+        tools:layout="@layout/fragment_payment_check" />
 </navigation>
