@@ -22,4 +22,5 @@ interface MovieDao {
   @Query("SELECT * FROM Movie_Table WHERE posterPath = :posterPath")
   suspend fun getMovieByPosterPath(posterPath: String): Movie?
 
+
 }

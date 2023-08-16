@@ -21,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.log
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -41,6 +42,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        movieViewModel.getNowPlayingMovies()
+
         favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
         observeViewModel()
 
@@ -104,12 +107,22 @@ class HomeFragment : Fragment() {
                 val favoriteMovies = dao?.readAllData()
                 if (favoriteMovies != null) {
                     for (favoriteMovie in favoriteMovies) {
-                        val index = movie.indexOfFirst { it.posterPath == favoriteMovie.posterPath }
-                        if (index >= 0) {
-                            movie[index].isButtonClicked = true
+                        val movieList = movieViewModel.moviesLiveData.value
 
 
+                        Log.d("yahoo1", "setUpRecycler: ${movieList?.get(0)?.posterPath}")
+                        Log.d("yahoo2", "setUpRecycler: ${favoriteMovie.posterPath}")
+                        val index = movieList?.indexOfFirst { it.title == favoriteMovie.title }
+                        if (index != null) {
+                            if (index >= 0) {
+                                movie[index].isButtonClicked = true
+                                Log.d("Bla", "setUpRecycler: ${movie[index].isButtonClicked} ")
+
+                            } else{
+                                Log.d("Bla", "setUpRecycler: nooway ")
+                            }
                         }
+
                     }
                 }
                 withContext(Dispatchers.Main) {
@@ -118,7 +131,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-        movieViewModel.getNowPlayingMovies()
     }
 
     private fun observeViewModel() {
