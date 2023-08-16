@@ -20,6 +20,7 @@ import com.example.example.Results
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +55,8 @@ class ComingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        movieViewModel.getComingPlayingMovies()
+
         favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
         observeViewModel()
         setUpRecycler()    }
@@ -63,7 +66,6 @@ class ComingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentComingBinding.inflate(inflater,container,false)
-        movieViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         return  binding.root
     }
     fun setUpRecycler(){
@@ -93,11 +95,31 @@ class ComingFragment : Fragment() {
                         }
                     }
 
+
                 })
+                GlobalScope.launch(Dispatchers.IO) {
+                    val favoriteMovies = dao?.readAllData()
+                    if (favoriteMovies != null) {
+                        for (favoriteMovie in favoriteMovies) {
+                            val movieList = movieViewModel.moviesComingLiveData.value
+
+                            val index = movieList?.indexOfFirst { it.title == favoriteMovie.title }
+                            if (index != null) {
+                                if (index >= 0) {
+                                    movie[index].isButtonClicked = true
+
+                                }
+                            }
+
+                        }
+                    }
+                    withContext(Dispatchers.Main) {
+                        adapter.notifyDataSetChanged()
+                    }
+                }
             }
             })
 
-        movieViewModel.getComingPlayingMovies()
 
 
     }
