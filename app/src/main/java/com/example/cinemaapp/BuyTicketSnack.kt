@@ -130,7 +130,7 @@ class BuyTicketSnack : Fragment() {
 
                 binding.btnNo.setBackgroundResource(R.drawable.rectangle_blue)
                 binding.btnYes.setBackgroundResource(R.drawable.rectangle_blue_border)
-                binding.rvSnack1.visibility = View.GONE
+                binding.rvSnack1.visibility = View.INVISIBLE
 
                 bn = false
                 by = true
@@ -163,19 +163,22 @@ class BuyTicketSnack : Fragment() {
 
 
                 )
+
             if (ticket.get(0).snakeCount.toString().toInt()>0)
                 findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck, info)
             else{
                 Toast.makeText(context, "You Need To Select Ticket", Toast.LENGTH_SHORT).show()
-            }        }
+            }
+        }
 
         binding.btnSignout.setOnClickListener {
             signOut()
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.movieDetailsFragment, true)
+                .setPopUpTo(R.id.buyTicketSnack, true)
                 .setPopUpTo(R.id.basicFragment,true)
                 .build()
-            findNavController().navigate(R.id.loginFragment, null, navOptions)
+            findNavController().navigate(R.id.action_buyTicketSnack_to_loginFragment, null, navOptions)
 //            findNavController().navigate(R.id.loginFragment)
         }
 

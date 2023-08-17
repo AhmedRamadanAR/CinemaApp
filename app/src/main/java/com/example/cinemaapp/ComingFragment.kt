@@ -1,7 +1,5 @@
 package com.example.cinemaapp
-
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,26 +8,18 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.cinemaapp.Data.remote.RetrofitClient
 import com.example.cinemaapp.databinding.FragmentComingBinding
 import com.example.cinemaapp.model.Movie
 import com.example.cinemaapp.model.MovieDao
 import com.example.cinemaapp.model.MovieDatabase
-import com.example.example.Pages
 import com.example.example.Results
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
-import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
+
 
 class ComingFragment : Fragment() {
     private lateinit var movieViewModel: MainViewModel
