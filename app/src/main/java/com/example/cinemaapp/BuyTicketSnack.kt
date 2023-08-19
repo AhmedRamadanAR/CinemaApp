@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.databinding.FragmentBuyTicketSnackBinding
 import com.example.cinemaapp.model.SnakeItemData
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -27,9 +30,22 @@ class BuyTicketSnack : Fragment() {
 
     private lateinit var database: DatabaseReference
 
+    private lateinit var auth: FirebaseAuth
+
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -94,15 +110,10 @@ class BuyTicketSnack : Fragment() {
         val currentCount = adapterCategory.getCurrentCount(0)
 
 
-
         val adapterCategoryTicket = TicketAdapter(ticket)
         view.findViewById<RecyclerView>(R.id.rv_ticket).adapter = adapterCategoryTicket
         view.findViewById<RecyclerView>(R.id.rv_ticket).layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-
-
-
 
 
         var by = true
@@ -161,12 +172,11 @@ class BuyTicketSnack : Fragment() {
                 "price3" to ticket.get(0).snakePriceEdit.toString(),
 
 
-
                 )
 
-            if (ticket.get(0).snakeCount.toString().toInt()>0)
+            if (ticket.get(0).snakeCount.toString().toInt() > 0)
                 findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck, info)
-            else{
+            else {
                 Toast.makeText(context, "You Need To Select Ticket", Toast.LENGTH_SHORT).show()
             }
         }
@@ -176,16 +186,23 @@ class BuyTicketSnack : Fragment() {
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.movieDetailsFragment, true)
                 .setPopUpTo(R.id.buyTicketSnack, true)
-                .setPopUpTo(R.id.basicFragment,true)
+                .setPopUpTo(R.id.basicFragment, true)
                 .build()
-            findNavController().navigate(R.id.action_buyTicketSnack_to_loginFragment, null, navOptions)
+            findNavController().navigate(
+                R.id.action_buyTicketSnack_to_loginFragment,
+                null,
+                navOptions
+            )
 //            findNavController().navigate(R.id.loginFragment)
         }
 
     }
 
     fun signOut() {
-        FirebaseAuth.getInstance().signOut()
+        auth.signOut()
+
+        googleSignInClient.signOut().addOnCompleteListener(requireActivity()) {}
+
     }
 
     fun retrieveMoneyFromDatabase() {

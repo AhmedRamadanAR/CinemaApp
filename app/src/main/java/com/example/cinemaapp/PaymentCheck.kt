@@ -132,10 +132,12 @@ class PaymentCheck : Fragment() {
                     }
 
                     if (money != null) {
-                        if (money - (v1 + v2 + v3 + v4) > 0) {
+                        if (money - (v1 + v2 + v3 + v4) >=0) {
                             database.child("money").setValue(money - (v1 + v2 + v3 + v4))
                             binding.tvMoneyAfterEdit.text =
                                 (money - (v1 + v2 + v3 + v4)).toString() + "$"
+                            Toast.makeText(context, "IT cost You ${v1 + v2 + v3 + v4}$", Toast.LENGTH_SHORT)
+                                .show()
                         } else {
                             Toast.makeText(context, "You Haven't Enough Money", Toast.LENGTH_SHORT)
                                 .show()
