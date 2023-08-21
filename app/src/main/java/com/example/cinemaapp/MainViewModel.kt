@@ -21,7 +21,8 @@ class MainViewModel:ViewModel() {
             movieService?.enqueue(object : Callback<Pages?> {
 
                 override fun onResponse(call: Call<Pages?>, response: Response<Pages?>) {
-                    val movie = response.body()?.results ?: emptyList()
+                    //delete filteration
+                    val movie = response.body()?.results?.filter { it.title != "Barbie"&&it.title != "No Hard Feelings" } ?: emptyList<Results>()
                     moviesLiveData.value = movie
                 }
 

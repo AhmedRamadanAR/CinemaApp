@@ -1,6 +1,7 @@
 package com.example.cinemaapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +16,14 @@ class HoldFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("lol2", "onViewCreated: hold loading")
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("lol", "onViewCreated: hold loading")
         setUpViewPager()
         setUpTabLayout()
 

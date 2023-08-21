@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
+import com.example.cinemaapp.model.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.*
 import kotlinx.coroutines.GlobalScope
@@ -149,7 +150,22 @@ class LoginFragment : Fragment() {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 val user = firebaseAuth.currentUser
+                if (user?.uid==null) {
 
+                    val userData = User(
+                        name = user!!.displayName.toString(),
+                        email = user.email.toString(),
+                        password = null.toString(),
+                        phone = user.phoneNumber.toString(),
+                        gender = null.toString(),
+                        money = 200.0
+                    )
+
+                    val database = FirebaseDatabase.getInstance()
+                    val myRef = database.getReference("users")
+                    myRef.child(user.uid).setValue(userData)
+
+                }
                 findNavController().navigate(R.id.action_loginFragment_to_basicFragment)
             } else {
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()

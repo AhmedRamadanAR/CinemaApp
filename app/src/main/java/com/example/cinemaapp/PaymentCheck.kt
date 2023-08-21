@@ -7,21 +7,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaapp.databinding.FragmentMovieDetailsBinding
 import com.example.cinemaapp.databinding.FragmentPaymentCheckBinding
+import com.example.cinemaapp.model.FinalTickets
+import com.example.cinemaapp.model.FinalTicketsDao
+import com.example.cinemaapp.model.MovieDao
+import com.example.cinemaapp.model.MovieDatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class PaymentCheck : Fragment() {
 
     private lateinit var binding: FragmentPaymentCheckBinding
+    private lateinit var ticketViewModel: TicketsViewModel
 
     private lateinit var database: DatabaseReference
+    private var dao: FinalTicketsDao? = null
+
 
     var price = ""
     var price1 = ""
@@ -30,6 +42,12 @@ class PaymentCheck : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val db = MovieDatabase.buildMovieDb(requireContext())
+            dao = db?.FinalTicketsDao()
+
+        }
 
     }
 
@@ -44,13 +62,16 @@ class PaymentCheck : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setUpView()
         retrieveMoneyBeforeFromDatabase()
 
         binding.btnBuy.setOnClickListener {
+            ticketViewModel = ViewModelProvider(this).get(TicketsViewModel::class.java)
+
             retrieveMoneyFromDatabase()
             lifecycleScope.launch {
-                delay(200) // delay for 3 seconds
+                delay(800)
                 val navOptions = NavOptions.Builder()
                     .setPopUpTo(R.id.buyTicketSnack, true)
                     .build()
@@ -108,6 +129,7 @@ class PaymentCheck : Fragment() {
 
 
     fun retrieveMoneyFromDatabase() {
+
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             database = FirebaseDatabase.getInstance().getReference("users").child(userId)
@@ -132,10 +154,18 @@ class PaymentCheck : Fragment() {
                     }
 
                     if (money != null) {
-                        if (money - (v1 + v2 + v3 + v4) > 0) {
+                        val ticketMoney= (v1 + v2 + v3 + v4)
+                        if (money - (v1 + v2 + v3 + v4) >=0) {
                             database.child("money").setValue(money - (v1 + v2 + v3 + v4))
                             binding.tvMoneyAfterEdit.text =
                                 (money - (v1 + v2 + v3 + v4)).toString() + "$"
+                            Toast.makeText(context, "IT cost You ${v1 + v2 + v3 + v4}$", Toast.LENGTH_SHORT)
+                                .show()
+                            val title = arguments?.getString("title")
+                            val uniqueID = UUID.randomUUID().toString()
+
+                            ticketViewModel.insertTickets(dao!!, FinalTickets(title!!,uniqueID,ticketMoney.toString(),binding.tvTicketCount.text.toString(),arguments?.getString("time").toString()))
+
                         } else {
                             Toast.makeText(context, "You Haven't Enough Money", Toast.LENGTH_SHORT)
                                 .show()

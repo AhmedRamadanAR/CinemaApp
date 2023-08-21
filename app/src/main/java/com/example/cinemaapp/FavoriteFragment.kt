@@ -57,14 +57,13 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeViewModel()
         setUpRecycler()
     }
-    private fun observeViewModel() {
-        favouriteMovieViewModel.favLiveData.observe(viewLifecycleOwner, Observer { movie ->
-
-        })
-    }
+//    private fun observeViewModel() {
+//        favouriteMovieViewModel.favLiveData.observe(viewLifecycleOwner, Observer { movie ->
+//
+//        })
+//    }
 
 
     fun setUpRecycler() {

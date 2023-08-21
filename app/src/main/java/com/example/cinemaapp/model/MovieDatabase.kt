@@ -1,12 +1,13 @@
 package com.example.cinemaapp.model
-
+import com.example.cinemaapp.model.FinalTickets
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities = [Movie::class], version = 1, exportSchema = false)
+@Database(entities = [FinalTickets::class,Movie::class], version = 1, exportSchema = false)
 abstract  class MovieDatabase:RoomDatabase() {
     abstract fun movieDao(): MovieDao
+    abstract fun FinalTicketsDao():FinalTicketsDao
 
     companion object {
         var db: MovieDatabase? = null
@@ -14,7 +15,7 @@ abstract  class MovieDatabase:RoomDatabase() {
             db = Room.databaseBuilder(
                 context.applicationContext,
                 MovieDatabase::class.java,
-                "notes"
+                "movies"
             )
                 .build()
             return db!!

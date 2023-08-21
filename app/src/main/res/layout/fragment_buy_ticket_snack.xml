@@ -50,10 +50,12 @@
             tools:listitem="@layout/snack_item" />
 
         <LinearLayout
+
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_ticket">
@@ -106,6 +108,31 @@
                         android:textAllCaps="false" />
                 </LinearLayout>
             </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_time1"
+                android:layout_marginStart="20dp"
+                android:text="9 pm"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:background="@drawable/rectangle_blue_border"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                >
+
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_time2"
+                android:layout_marginStart="20dp"
+                android:text="12 Am"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:background="@drawable/rectangle_blue_border"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                >
+
+            </androidx.appcompat.widget.AppCompatButton>
 
 
         </LinearLayout>

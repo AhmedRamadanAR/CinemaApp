@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.databinding.ItemMovieBinding
-import com.example.cinemaapp.databinding.MovieItemFavouriteBinding
 import com.example.cinemaapp.model.Movie
 import com.example.cinemaapp.model.MovieDao
 import com.example.example.Results

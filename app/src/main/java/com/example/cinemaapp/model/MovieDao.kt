@@ -12,6 +12,8 @@ import androidx.room.Update
 interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend  fun addMovie(movie:Movie)
+
+
 @Query("SELECT * FROM Movie_Table ")
   suspend  fun readAllData (): List<Movie>
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaapp.databinding.FragmentMovieDetailsBinding
 import com.squareup.picasso.Picasso
@@ -27,7 +28,11 @@ class MovieDetailsFragment : Fragment() {
         setUpViews()
 
         binding.btnSubmit.setOnClickListener {
-            findNavController().navigate(R.id.buyTicketSnack)
+            val title = arguments?.getString("title")
+            val info = bundleOf(
+                "title" to title)
+
+            findNavController().navigate(R.id.buyTicketSnack,info)
         }
     }
 
@@ -50,7 +55,7 @@ class MovieDetailsFragment : Fragment() {
     fun setUpViews() {
 
         val genre = arguments?.getInt("genre")
-        val type = arguments?.getString("type")
+        val type = arguments?.getBoolean("type")
         val photoPath = arguments?.getString("photo")
 
         binding.tvTitle.text = arguments?.getString("title")
@@ -71,7 +76,7 @@ class MovieDetailsFragment : Fragment() {
 
 
         }
-        if (type == "true") {
+        if (type == true) {
             binding.tvType.text = "Adults +18"
         } else {
             binding.tvType.text = "Family"

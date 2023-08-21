@@ -1,5 +1,6 @@
 package com.example.cinemaapp
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ class TicketAdapter(private val tickets: List<SnakeItemData>) :
     RecyclerView.Adapter<TicketAdapter.TicketItemViewHolder>() {
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: TicketAdapter.TicketItemViewHolder, position: Int) {
 
         holder.itemView.findViewById<Button>(R.id.btn_small).visibility=View.GONE

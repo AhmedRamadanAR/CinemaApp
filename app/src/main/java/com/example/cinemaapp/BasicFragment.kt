@@ -8,7 +8,7 @@ import com.example.cinemaapp.databinding.FragmentBasicBinding
 
 
 class BasicFragment : Fragment() {
-    val homeFragment=HoldFragment()
+    val holdFragment=HoldFragment()
     val ticketsFragment=TicketsFragment()
     val favoriteFragment=FavoriteFragment()
     lateinit var binding:FragmentBasicBinding
@@ -20,20 +20,18 @@ class BasicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragment(homeFragment)
+        setFragment(holdFragment)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
 
                 R.id.myHome-> {
-                    setFragment(homeFragment)
+
+                    setFragment(holdFragment)
                 }
                 R.id.myFavorite->{
-                    fragmentManager?.beginTransaction()?.remove(homeFragment)?.commit()
-
                     setFragment(favoriteFragment)              }
                 R.id.myTickets->{
-                    fragmentManager?.beginTransaction()?.remove(homeFragment)?.commit()
 
                     setFragment(ticketsFragment)                       }
 
@@ -46,8 +44,7 @@ class BasicFragment : Fragment() {
 
     fun setFragment(fragment:Fragment)=
 
-        parentFragmentManager?.beginTransaction()?.apply {
-
+        childFragmentManager?.beginTransaction()?.apply {
             replace(R.id.fragmentContainerView2, fragment)
 
             commit()

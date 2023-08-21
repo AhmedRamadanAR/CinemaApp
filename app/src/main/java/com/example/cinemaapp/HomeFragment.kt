@@ -35,7 +35,9 @@ class HomeFragment : Fragment() {
         GlobalScope.launch(Dispatchers.IO) {
             val db = MovieDatabase.buildMovieDb(requireContext())
             dao = db?.movieDao()
+
         }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,10 +47,11 @@ class HomeFragment : Fragment() {
         movieViewModel.getNowPlayingMovies()
 
         favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
-        observeViewModel()
 
         setUpRecycler()
+
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,7 +97,9 @@ class HomeFragment : Fragment() {
                                 movie[position].overview.toString(),
                                 isFavorite = true
                             )
+
                         )
+                    observeViewModel()
                 }
 
                 override fun onDeleteClick(position: Int) {
