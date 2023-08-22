@@ -48,7 +48,6 @@ class ComingFragment : Fragment() {
         movieViewModel.getComingPlayingMovies()
 
         favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
-        observeViewModel()
         setUpRecycler()    }
 
     override fun onCreateView(
@@ -76,7 +75,7 @@ class ComingFragment : Fragment() {
                                 dao!!,
                                 Movie("https://image.tmdb.org/t/p/w500/${filteredMovies[position].posterPath}",filteredMovies[position].title.toString(),filteredMovies[position].overview.toString(), isFavorite = true)
                             )
-
+                        observeViewModel()
                     }
 
                     override fun onDeleteClick(position: Int) {

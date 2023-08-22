@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
         movieViewModel.getNowPlayingMovies()
 
         favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
-        observeViewModel()
 
         setUpRecycler()
     }
@@ -95,6 +94,7 @@ class HomeFragment : Fragment() {
                                 isFavorite = true
                             )
                         )
+                    observeViewModel()
                 }
 
                 override fun onDeleteClick(position: Int) {
