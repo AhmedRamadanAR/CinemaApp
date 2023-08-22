@@ -1,7 +1,6 @@
 package com.example.cinemaapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +12,6 @@ import com.squareup.picasso.Picasso
 
 class MovieDetailsFragment : Fragment() {
     lateinit var binding: FragmentMovieDetailsBinding
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        //findNavController().navigate(R.id.basicFragment)
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,11 +36,7 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        findNavController().navigate(R.id.basicFragment)
-//
-//    }
+
 
     fun setUpViews() {
 

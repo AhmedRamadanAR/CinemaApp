@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.R
 import com.example.cinemaapp.databinding.MovieItemFavouriteBinding
 import com.example.cinemaapp.model.Movie
-
-import com.example.example.Results
 import com.squareup.picasso.Picasso
 
 class FavoriteAdapter(private  var lista: ArrayList<Movie>):RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {

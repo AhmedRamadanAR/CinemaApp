@@ -13,10 +13,6 @@ class BasicFragment : Fragment() {
     val favoriteFragment=FavoriteFragment()
     lateinit var binding:FragmentBasicBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

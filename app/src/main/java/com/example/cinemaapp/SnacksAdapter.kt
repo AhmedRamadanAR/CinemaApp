@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.model.SnakeItemData
-import com.example.cinemaapp.model.Ticket
 
 class SnacksAdapter(private val snakes: List<SnakeItemData>) :
     RecyclerView.Adapter<SnacksAdapter.SnakeItemViewHolder>() {
@@ -43,8 +42,7 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
             price.text = 0.toString()
         }
 
-        var by = true
-        var bn = true
+
 
         var bs = true
         var bm = true
@@ -216,22 +214,13 @@ class SnacksAdapter(private val snakes: List<SnakeItemData>) :
             }
         }
 
-        Log.d("ITME", "onBindViewHolder: ${count.text}")
-
-        var sd = Ticket(
-            snakes[position].type.toString(),
-            snakes[position].snakeCount.toString().toInt(),
-            snakes[position].snakePrice.toString().toDouble()
-        )
     }
 
     override fun getItemCount() = snakes.size
 
     inner class SnakeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
-    fun getCurrentCount(position: Int): String {
-        return snakes[position].snakeCount.toString()
-    }
+
 
 
 }

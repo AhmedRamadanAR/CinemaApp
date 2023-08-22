@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cinemaapp.model.FinalTickets
 import com.example.cinemaapp.model.FinalTicketsDao
-import com.example.cinemaapp.model.TicketsInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

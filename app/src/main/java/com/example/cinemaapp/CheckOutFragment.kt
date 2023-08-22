@@ -11,15 +11,6 @@ import com.example.cinemaapp.databinding.FragmentCheckOutBinding
 class CheckOutFragment : Fragment() {
     lateinit var binding:FragmentCheckOutBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

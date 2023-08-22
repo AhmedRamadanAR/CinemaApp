@@ -36,9 +36,7 @@ class TicketsFragment : Fragment() {
             val db = MovieDatabase.buildMovieDb(requireContext())
             dao = db?.FinalTicketsDao()
         }
-//        val adapter = TicketsResultsAdapter()
-//        binding.rvTickets.adapter=adapter
-//        binding.rvTickets.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +52,6 @@ class TicketsFragment : Fragment() {
 
         binding = FragmentTicketsBinding.inflate(inflater, container, false)
 
-        // Inflate the layout for this fragment
         return binding.root
     }
     fun setUpRecycler() {

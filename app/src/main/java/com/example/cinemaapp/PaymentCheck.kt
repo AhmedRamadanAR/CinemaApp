@@ -1,22 +1,18 @@
 package com.example.cinemaapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.cinemaapp.databinding.FragmentMovieDetailsBinding
 import com.example.cinemaapp.databinding.FragmentPaymentCheckBinding
 import com.example.cinemaapp.model.FinalTickets
 import com.example.cinemaapp.model.FinalTicketsDao
-import com.example.cinemaapp.model.MovieDao
 import com.example.cinemaapp.model.MovieDatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -55,7 +51,6 @@ class PaymentCheck : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentPaymentCheckBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -77,8 +72,6 @@ class PaymentCheck : Fragment() {
                     .build()
                 findNavController().navigate(R.id.basicFragment, null, navOptions)
             }
-
-//            findNavController().navigate(R.id.action_buyTicketSnack_to_paymentCheck)
 
 
         }
@@ -105,14 +98,13 @@ class PaymentCheck : Fragment() {
         price3 = arguments?.getString("price3").toString()
 
 
-//        Log.d("COME", "setUpView: $count")
 
         binding.tvPopcornCount.text = count
         binding.tvPopcornPrice.text = price + "$"
 
         binding.tvDrinkCount.text = count1
         binding.tvDrinkPrice.text = price1 + "$"
-//
+
         binding.tvChipsCount.text = count2
         binding.tvChipsPrice.text = price2 + "$"
 
@@ -171,10 +163,7 @@ class PaymentCheck : Fragment() {
                                 .show()
                         }
                     }
-//                    else {
-//                        Toast.makeText(context, "Null Money", Toast.LENGTH_SHORT)
-//                            .show()
-//                    }
+
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -191,11 +180,6 @@ class PaymentCheck : Fragment() {
                 .show()
         }
 
-//            findNavController().navigate(R.id.action_paymentCheck_to_basicFragment)
-//        val navOptions = NavOptions.Builder()
-//            .setPopUpTo(R.id.buyTicketSnack, true)
-//            .build()
-//        findNavController().navigate(R.id.basicFragment, null, navOptions)
     }
 
 
@@ -227,9 +211,5 @@ class PaymentCheck : Fragment() {
                 .show()
         }
 
-//        val navOptions = NavOptions.Builder()
-//            .setPopUpTo(R.id.buyTicketSnack, true)
-//            .build()
-//        findNavController().navigate(R.id.basicFragment, null, navOptions)
     }
 }

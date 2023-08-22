@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapp.databinding.TicketItemBinding
 import com.example.cinemaapp.model.FinalTickets
-import com.example.cinemaapp.model.TicketsInfo
-import com.squareup.picasso.Picasso
+
 class TicketsResultsAdapter(var lista:ArrayList<FinalTickets>): RecyclerView.Adapter<TicketsResultsAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView:TicketItemBinding):RecyclerView.ViewHolder(itemView.root){

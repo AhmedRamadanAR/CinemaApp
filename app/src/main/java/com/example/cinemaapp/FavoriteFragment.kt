@@ -37,9 +37,7 @@ class FavoriteFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         GlobalScope.launch(Dispatchers.IO) {
-
             val db = MovieDatabase.buildMovieDb(requireContext())
             dao = db?.movieDao()
         }
@@ -59,12 +57,6 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpRecycler()
     }
-//    private fun observeViewModel() {
-//        favouriteMovieViewModel.favLiveData.observe(viewLifecycleOwner, Observer { movie ->
-//
-//        })
-//    }
-
 
     fun setUpRecycler() {
         favouriteMovieViewModel.favLiveData.observe(viewLifecycleOwner, Observer { movie ->
@@ -75,13 +67,5 @@ class FavoriteFragment : Fragment() {
 
         favouriteMovieViewModel.viewfavMovie(dao)
     }
-
-
-
-
-
-
-
-
 
 }

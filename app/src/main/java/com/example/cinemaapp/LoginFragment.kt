@@ -2,25 +2,19 @@ package com.example.cinemaapp
 
 import android.app.Activity
 import android.app.ProgressDialog
-import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaapp.databinding.FragmentLoginBinding
-import com.example.cinemaapp.databinding.FragmentSignupBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,7 +22,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.cinemaapp.model.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.*
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -46,10 +39,6 @@ class LoginFragment : Fragment() {
     private lateinit var database: DatabaseReference
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -186,7 +175,6 @@ class LoginFragment : Fragment() {
                     if (context != null) {
                         Toast.makeText(context, "Hello $name ", Toast.LENGTH_SHORT).show()
                     }
-//                    Toast.makeText(context, "Hello $name ", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -199,7 +187,6 @@ class LoginFragment : Fragment() {
             }
             database.addListenerForSingleValueEvent(valueEventListener)
         } else {
-//            findNavController().navigate(R.id.action_loginFragment_to_basicFragment)
             Toast.makeText(context, "You'r Not Logged In Please Login First", Toast.LENGTH_SHORT)
                 .show()
         }

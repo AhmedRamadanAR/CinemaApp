@@ -2,11 +2,8 @@ package com.example.cinemaapp
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cinemaapp.Data.remote.RetrofitClient
-import com.example.cinemaapp.model.MovieDao
-
 import com.example.example.Pages
 import com.example.example.Results
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

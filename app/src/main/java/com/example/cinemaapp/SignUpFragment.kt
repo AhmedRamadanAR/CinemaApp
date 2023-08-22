@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.util.*
 
 
 class SignUpFragment : Fragment() {
@@ -74,9 +73,6 @@ class SignUpFragment : Fragment() {
     val fullnameregex = "^[a-zA-Z]{4,} [a-zA-Z]{4,}".toRegex()
     val passwordregex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$".toRegex()
 
-//    val Emailregex = "^[a-zA-Z]{4,}.*@.*\\..+".toRegex()
-//    val Emailregex = "^[a-zA-Z]{4,}.*".toRegex()
-
     fun validatePhoneNumber(phoneNumber: String): Boolean {
         return phoneNumberregex.matches(phoneNumber)
     }
@@ -122,9 +118,7 @@ class SignUpFragment : Fragment() {
             } else if (!validatePhoneNumber(phone)) {
                 Toast.makeText(context, "Phone number not valid", Toast.LENGTH_SHORT).show()
             }
-//            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                Toast.makeText(context, "Enter Your Email", Toast.LENGTH_SHORT).show()
-//            }
+
             else if (!validateEmail(email)) {
                 Toast.makeText(context, "Email not valid", Toast.LENGTH_SHORT).show()
             } else if (password.isEmpty()) {
